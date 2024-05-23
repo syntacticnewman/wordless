@@ -1,9 +1,3 @@
-import Game from "./game.js";
+import { gameStart } from "./controllers/wordless.js";
 
-document.addEventListener("DOMContentLoaded", async () => {
-  await Game.init();
-
-  await Game.submitGuess("smart");
-
-  console.log(Game.getState());
-});
+document.addEventListener("DOMContentLoaded", gameStart);
