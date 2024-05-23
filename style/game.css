@@ -1,0 +1,102 @@
+@import "./base.css";
+
+/* Header section */
+
+header {
+  background-color: var(--white);
+  border-bottom: 1px solid var(--light-gray);
+  padding: 5px 0;
+}
+
+/* Title */
+
+header h1 {
+  text-align: center;
+}
+
+header h1 span.yellow {
+  color: var(--yellow);
+}
+
+header h1 span.green {
+  color: var(--green);
+}
+
+header h1 span.gray {
+  color: var(--dark-gray);
+}
+
+/* Styles for the grid layout */
+
+.table {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  justify-items: center;
+}
+
+.row {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+}
+
+.box {
+  border: 1px solid var(--light-gray);
+  width: var(--box-size);
+  height: var(--box-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Styles for board */
+
+.board {
+  margin: 0 auto;
+  padding: 1.5rem 0;
+}
+
+/* Styles for letters */
+
+[class*="letter"] {
+  background-color: var(--white);
+  border: 1px solid var(--black);
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.letter--incorrect {
+  color: var(--white);
+  background-color: var(--dark-gray);
+}
+
+.letter--wrong-place {
+  color: var(--white);
+  background-color: var(--yellow);
+}
+
+.letter--correct {
+  color: var(--white);
+  background-color: var(--green);
+}
+
+/* Responsive min-width: 425px */
+
+@media (min-width: 425px) {
+  /* Responsive board */
+
+  .board {
+    max-width: calc(var(--box-size-larger) * 5 + 20px);
+  }
+
+  /* Responsive box */
+
+  .box {
+    width: var(--box-size-larger);
+    height: var(--box-size-larger);
+  }
+}
