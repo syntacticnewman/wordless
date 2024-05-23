@@ -1,33 +1,39 @@
 import Game from "../modules/game.js";
 import Keyboard from "../modules/keyboard.js";
+import UI from "../modules/ui.js";
 
 const handleOnBufferChange = (buffer) => {
-  console.log("Keyboard.buffer->", buffer.getValue());
-  // TODO: render buffer in UI
+  if (Game.isOver()) return;
+
+  const index = Game.getCurrentGuessNumber();
+  const currentRow = UI.queryRow(index);
+
+  UI.renderLetters(currentRow, buffer.toArray());
 };
 
 const handleOnEnter = async (buffer) => {
-  console.log("Keyboard.Enter->", buffer.getValue());
+  if (Game.isOver()) return;
 
   await Game.submitGuess(buffer.getValue(), {
     onSuccess() {
-      // clean up
       buffer.flush();
-      // TODO: if game is over and player wins show feedback
-      // TODO: else move to next guess row
+
+      if (Game.isOver()) {
+        if (Game.hasPlayerWon()) {
+          alert("Congratulations! You won! 🥳");
+        } else {
+          alert("Game Over! You loose! 🥺");
+        }
+      }
     },
     onError(error) {
-      // TODO: show feedback for error
+      alert(error.message);
       console.error(error);
     },
   });
-
-  console.log("Game.state->", Game.getState());
 };
 
 const onGameInit = async () => {
-  console.log("Game.state->", Game.getState());
-
   Keyboard.init({
     onBufferChange: handleOnBufferChange,
     onEnter: handleOnEnter,
