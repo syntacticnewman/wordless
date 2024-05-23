@@ -15,6 +15,12 @@ const getState = () => ({
   win,
 });
 
+const getCurrentGuessNumber = () => getState().guesses;
+
+const isOver = () => getState().gameOver;
+
+const hasPlayerWon = () => getState().win;
+
 const isSecretWord = (guess) =>
   String(guess).toLowerCase() === String($secretWord).toLowerCase();
 
@@ -30,7 +36,7 @@ const validateGuess = async (guess) => {
   const isValid = await API.validateWord(guess);
 
   if (!isValid) {
-    throw new Error(`Word '${guess}' is not in the word list.`);
+    throw new Error(`'${guess}' is not in the word list.`);
   }
 };
 
@@ -65,4 +71,11 @@ const init = async ({ onInit }) => {
   onInit();
 };
 
-export default { getState, submitGuess, init };
+export default {
+  getCurrentGuessNumber,
+  getState,
+  hasPlayerWon,
+  init,
+  isOver,
+  submitGuess,
+};

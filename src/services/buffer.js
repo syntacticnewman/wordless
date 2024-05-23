@@ -20,9 +20,12 @@ const flush = () => {
 
 const getValue = () => buffer;
 
+const toArray = () => buffer.split("");
+
 export default {
-  push,
-  pop,
   flush,
   getValue,
+  pop,
+  push,
+  toArray,
 };
