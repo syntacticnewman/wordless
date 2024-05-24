@@ -18,7 +18,16 @@ const renderLetters = (node, letters) => {
   });
 };
 
+const renderFeedback = (node, feedback) => {
+  Array.from(queryBoxes(node)).forEach((box, index) => {
+    if (typeof feedback[index] === "string") {
+      box.classList.replace("letter", `letter--${feedback[index]}`);
+    }
+  });
+};
+
 export default {
   queryRow,
+  renderFeedback,
   renderLetters,
 };
