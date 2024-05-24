@@ -2,11 +2,13 @@ import Game from "../modules/game.js";
 import Keyboard from "../modules/keyboard.js";
 import UI from "../modules/ui.js";
 
+let currentRow;
+
 const handleOnBufferChange = (buffer) => {
   if (Game.isOver()) return;
 
   const index = Game.getCurrentGuessNumber();
-  const currentRow = UI.queryRow(index);
+  currentRow = UI.queryRow(index);
 
   UI.renderLetters(currentRow, buffer.toArray());
 };
@@ -15,16 +17,22 @@ const handleOnEnter = async (buffer) => {
   if (Game.isOver()) return;
 
   await Game.submitGuess(buffer.getValue(), {
-    onSuccess() {
+    onSuccess(feedback) {
       buffer.flush();
 
-      if (Game.isOver()) {
-        if (Game.hasPlayerWon()) {
-          alert("Congratulations! You won! 🥳");
-        } else {
-          alert("Game Over! You loose! 🥺");
-        }
+      if (currentRow) {
+        UI.renderFeedback(currentRow, feedback);
       }
+
+      setTimeout(() => {
+        if (Game.isOver()) {
+          if (Game.hasPlayerWon()) {
+            alert("Congratulations! You won! 🥳");
+          } else {
+            alert("Game Over! You loose! 🥺");
+          }
+        }
+      }, 500);
     },
     onError(error) {
       alert(error.message);

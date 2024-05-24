@@ -21,8 +21,10 @@ const isOver = () => getState().gameOver;
 
 const hasPlayerWon = () => getState().win;
 
-const isSecretWord = (guess) =>
-  String(guess).toLowerCase() === String($secretWord).toLowerCase();
+const isEqualString = (a, b) =>
+  String(a).toLowerCase() === String(b).toLowerCase();
+
+const isSecretWord = (guess) => isEqualString(guess, $secretWord);
 
 const validateGuess = async (guess) => {
   if (gameOver) {
@@ -56,11 +58,43 @@ const processGuess = (guess) => {
   }
 };
 
+const provideFeedback = (guess) => {
+  const feedback = [];
+  const secretLetters = $secretWord.toLowerCase().split("");
+
+  const removeSecretLetter = (letter) => {
+    secretLetters.splice(secretLetters.indexOf(letter), 1);
+  };
+
+  for (let i = 0; i < guess.length; i++) {
+    const currentLetter = guess.charAt(i);
+
+    // letter is in the correct position
+    if (isEqualString(currentLetter, $secretWord.charAt(i))) {
+      feedback.push("correct");
+      removeSecretLetter(currentLetter);
+      continue;
+    }
+
+    // letter is present but in the wrong position
+    if (secretLetters.includes(currentLetter)) {
+      feedback.push("wrong");
+      removeSecretLetter(currentLetter);
+      continue;
+    }
+
+    // letter is not in the word at all
+    feedback.push("incorrect");
+  }
+
+  return feedback;
+};
+
 const submitGuess = async (guess, { onSuccess, onError }) => {
   try {
     await validateGuess(guess);
     processGuess(guess);
-    onSuccess();
+    onSuccess(provideFeedback(guess));
   } catch (error) {
     onError(error);
   }
