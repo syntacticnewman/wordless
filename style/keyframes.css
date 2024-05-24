@@ -1,0 +1,11 @@
+@keyframes typing {
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes flip {
+  50% {
+    transform: rotateX(90deg);
+  }
+}

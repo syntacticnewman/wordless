@@ -13,6 +13,9 @@
   /* Box */
   --box-size: 56px;
   --box-size-larger: 64px;
+  /* Animation */
+  --typing-speed: 50ms;
+  --flip-speed: 0.5s;
 }
 
 html {

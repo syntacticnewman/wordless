@@ -1,4 +1,5 @@
 @import "./base.css";
+@import "./keyframes.css";
 
 /* Header section */
 
@@ -67,21 +68,25 @@ header h1 span.gray {
   font-size: 2rem;
   font-weight: bold;
   text-transform: uppercase;
+  animation: typing var(--typing-speed) ease-out;
 }
 
 .letter--correct {
   color: var(--white);
   background-color: var(--green);
+  animation: flip var(--flip-speed) ease-in;
 }
 
 .letter--wrong {
   color: var(--white);
   background-color: var(--yellow);
+  animation: flip var(--flip-speed) ease-in;
 }
 
 .letter--incorrect {
   color: var(--white);
   background-color: var(--dark-gray);
+  animation: flip var(--flip-speed) ease-in;
 }
 
 /* Responsive min-width: 425px */
