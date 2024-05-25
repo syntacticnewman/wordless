@@ -31,3 +31,9 @@
     transform: translateX(calc(var(--shake-offset) * -1));
   }
 }
+
+@keyframes win {
+  50% {
+    transform: translateY(calc(var(--win-offset) * -1));
+  }
+}

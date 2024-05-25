@@ -79,6 +79,13 @@ header h1 span.gray {
   transition-timing-function: ease-in;
 }
 
+.guess--correct > [class*="letter"] {
+  animation-name: win;
+  animation-duration: var(--win-speed);
+  animation-timing-function: ease-in-out;
+  animation-delay: calc(var(--win-interval) * var(--i));
+}
+
 /* Styles for letters */
 
 [class*="letter"] {

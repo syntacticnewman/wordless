@@ -10,13 +10,16 @@ const handleOnSubmitSuccess = (buffer, feedback) => {
   UI.renderLettersFeedback(previousGuess, feedback);
 
   if (Game.isOver()) {
+    UI.renderGameOverFeedback(previousGuess, Game.hasPlayerWon());
+
+    // wait for animations to complete
     setTimeout(() => {
       if (Game.hasPlayerWon()) {
-        alert("Congratulations! You won! 🥳");
+        alert("Congratulations! You win! 🥳");
       } else {
-        alert("Game Over! You loose! 🥺");
+        alert("Game Over! You lose! 🥺");
       }
-    }, 500);
+    }, 1000);
   }
 };
 

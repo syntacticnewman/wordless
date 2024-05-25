@@ -11,9 +11,9 @@ const renderLetters = (index, letters) => {
     // remove previous error state
     row.classList.remove("guess--invalid");
 
-    queryBoxes(row).forEach((box, index) => {
-      if ("string" === typeof letters[index]) {
-        box.textContent = letters[index];
+    queryBoxes(row).forEach((box, i) => {
+      if ("string" === typeof letters[i]) {
+        box.textContent = letters[i];
         box.classList.add("letter");
       } else {
         box.textContent = "";
@@ -27,9 +27,9 @@ const renderLettersFeedback = (index, feedback) => {
   const row = queryRow(index);
 
   if (row) {
-    queryBoxes(row).forEach((box, index) => {
-      if ("string" === typeof feedback[index]) {
-        box.classList.add("letter--flip", `letter--${feedback[index]}`);
+    queryBoxes(row).forEach((box, i) => {
+      if ("string" === typeof feedback[i]) {
+        box.classList.add("letter--flip", `letter--${feedback[i]}`);
       }
     });
   }
@@ -43,7 +43,25 @@ const renderGuessFeedback = (index) => {
   }
 };
 
+const renderGameOverFeedback = (index, win) => {
+  if (!win) return; // TODO: feedback for losing?
+
+  const row = queryRow(index);
+
+  if (row) {
+    queryBoxes(row).forEach((box, i) => {
+      box.style = `--i: ${i}`;
+    });
+
+    // wait for the flip animation to complete
+    setTimeout(() => {
+      row.classList.add("guess--correct");
+    }, 500);
+  }
+};
+
 export default {
+  renderGameOverFeedback,
   renderGuessFeedback,
   renderLetters,
   renderLettersFeedback,

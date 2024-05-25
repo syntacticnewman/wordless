@@ -19,6 +19,9 @@
   --flip-speed: 0.5s;
   --shake-speed: 300ms;
   --shake-offset: 2.5px;
+  --win-offset: 2.5rem;
+  --win-speed: 300ms;
+  --win-interval: 100ms;
 }
 
 html {
