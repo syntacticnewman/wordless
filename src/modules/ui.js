@@ -1,15 +1,18 @@
 const queryAllRows = () => document.querySelectorAll(".guess.row");
 
-const queryRow = (index) => queryAllRows()[index];
+const queryRow = (index) => queryAllRows().item(index);
 
-const queryBoxes = (node) => node.querySelectorAll(".box");
+const queryBoxes = (row) => row.querySelectorAll(".box");
 
-const renderLetters = (node, letters) => {
-  const boxes = Array.from(queryBoxes(node));
+const renderLetters = (index, letters) => {
+  const row = queryRow(index);
 
-  boxes.forEach((box, index) => {
-    if (typeof letters[index] === "string") {
-      box.textContent = letters[index];
+  // remove previous error state
+  row.classList.remove("guess--invalid");
+
+  queryBoxes(row).forEach((box, i) => {
+    if ("string" === typeof letters[i]) {
+      box.textContent = letters[i];
       box.classList.add("letter");
     } else {
       box.textContent = "";
@@ -18,16 +21,40 @@ const renderLetters = (node, letters) => {
   });
 };
 
-const renderFeedback = (node, feedback) => {
-  Array.from(queryBoxes(node)).forEach((box, index) => {
-    if (typeof feedback[index] === "string") {
-      box.classList.replace("letter", `letter--${feedback[index]}`);
+const renderLettersFeedback = (index, feedback) => {
+  const row = queryRow(index);
+
+  queryBoxes(row).forEach((box, i) => {
+    if ("string" === typeof feedback[i]) {
+      box.classList.add("letter--flip", `letter--${feedback[i]}`);
     }
   });
 };
 
+const renderGuessFeedback = (index) => {
+  const row = queryRow(index);
+
+  row.classList.add("guess--invalid");
+};
+
+const renderGameOverFeedback = (index, win) => {
+  if (!win) return; // TODO: feedback for losing?
+
+  const row = queryRow(index);
+
+  queryBoxes(row).forEach((box, i) => {
+    box.style = `--i: ${i}`;
+  });
+
+  // wait for the flip animation to complete
+  setTimeout(() => {
+    row.classList.add("guess--correct");
+  }, 500);
+};
+
 export default {
-  queryRow,
-  renderFeedback,
+  renderGameOverFeedback,
+  renderGuessFeedback,
   renderLetters,
+  renderLettersFeedback,
 };

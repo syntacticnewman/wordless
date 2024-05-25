@@ -7,12 +7,21 @@
   --black: #0d0d0d;
   --yellow: #f2b705;
   --green: #91bf63;
+  --red: #c53a50;
   /* Font */
   --font-family: sans-serif;
   --font-size: 1rem;
   /* Box */
   --box-size: 56px;
   --box-size-larger: 64px;
+  /* Animation */
+  --typing-speed: 50ms;
+  --flip-speed: 0.5s;
+  --shake-speed: 300ms;
+  --shake-offset: 2.5px;
+  --win-offset: 2.5rem;
+  --win-speed: 300ms;
+  --win-interval: 100ms;
 }
 
 html {
