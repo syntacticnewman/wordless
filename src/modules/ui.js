@@ -7,40 +7,34 @@ const queryBoxes = (row) => row.querySelectorAll(".box");
 const renderLetters = (index, letters) => {
   const row = queryRow(index);
 
-  if (row) {
-    // remove previous error state
-    row.classList.remove("guess--invalid");
+  // remove previous error state
+  row.classList.remove("guess--invalid");
 
-    queryBoxes(row).forEach((box, i) => {
-      if ("string" === typeof letters[i]) {
-        box.textContent = letters[i];
-        box.classList.add("letter");
-      } else {
-        box.textContent = "";
-        box.classList.remove("letter");
-      }
-    });
-  }
+  queryBoxes(row).forEach((box, i) => {
+    if ("string" === typeof letters[i]) {
+      box.textContent = letters[i];
+      box.classList.add("letter");
+    } else {
+      box.textContent = "";
+      box.classList.remove("letter");
+    }
+  });
 };
 
 const renderLettersFeedback = (index, feedback) => {
   const row = queryRow(index);
 
-  if (row) {
-    queryBoxes(row).forEach((box, i) => {
-      if ("string" === typeof feedback[i]) {
-        box.classList.add("letter--flip", `letter--${feedback[i]}`);
-      }
-    });
-  }
+  queryBoxes(row).forEach((box, i) => {
+    if ("string" === typeof feedback[i]) {
+      box.classList.add("letter--flip", `letter--${feedback[i]}`);
+    }
+  });
 };
 
 const renderGuessFeedback = (index) => {
   const row = queryRow(index);
 
-  if (row) {
-    row.classList.add("guess--invalid");
-  }
+  row.classList.add("guess--invalid");
 };
 
 const renderGameOverFeedback = (index, win) => {
@@ -48,16 +42,14 @@ const renderGameOverFeedback = (index, win) => {
 
   const row = queryRow(index);
 
-  if (row) {
-    queryBoxes(row).forEach((box, i) => {
-      box.style = `--i: ${i}`;
-    });
+  queryBoxes(row).forEach((box, i) => {
+    box.style = `--i: ${i}`;
+  });
 
-    // wait for the flip animation to complete
-    setTimeout(() => {
-      row.classList.add("guess--correct");
-    }, 500);
-  }
+  // wait for the flip animation to complete
+  setTimeout(() => {
+    row.classList.add("guess--correct");
+  }, 500);
 };
 
 export default {
