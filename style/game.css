@@ -70,7 +70,9 @@ header h1 span.gray {
 .guess--invalid > [class*="letter"] {
   border: 1px solid var(--red);
   color: var(--red);
-  transition: all calc(var(--shake-speed) / 2) ease-in;
+  transition-property: border, color;
+  transition-duration: calc(var(--shake-speed) / 2);
+  transition-timing-function: ease-in;
 }
 
 /* Styles for letters */
@@ -86,7 +88,10 @@ header h1 span.gray {
 
 .letter--flip {
   animation: flip var(--flip-speed) ease-in;
-  transition: all 50ms calc(var(--flip-speed) / 2) ease-out;
+  transition-property: color, background-color;
+  transition-duration: 50ms;
+  transition-delay: calc(var(--flip-speed) / 2);
+  transition-timing-function: ease-out;
 }
 
 .letter--correct {
