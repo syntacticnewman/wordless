@@ -63,6 +63,10 @@ header h1 span.gray {
 
 /* Styles for guesses */
 
+.guess {
+  margin-bottom: 5px;
+}
+
 .guess--invalid {
   animation: shake var(--shake-speed) cubic-bezier(0.22, 0.61, 0.36, 1);
 }
