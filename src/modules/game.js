@@ -1,4 +1,9 @@
 import API from "../services/api.js";
+import {
+  GameOverError,
+  GuessInvalidError,
+  GuessLengthError,
+} from "./game-errors.js";
 
 const REQUIRED_GUESS_LENGTH = 5;
 const MAX_GUESSES = 6;
@@ -28,17 +33,17 @@ const isSecretWord = (guess) => isEqualString(guess, $secretWord);
 
 const validateGuess = async (guess) => {
   if (gameOver) {
-    throw new Error("Game Over!");
+    throw new GameOverError();
   }
 
   if (guess.length < REQUIRED_GUESS_LENGTH) {
-    throw new Error(`Word must be ${REQUIRED_GUESS_LENGTH} letters.`);
+    throw new GuessLengthError(REQUIRED_GUESS_LENGTH);
   }
 
   const isValid = await API.validateWord(guess);
 
   if (!isValid) {
-    throw new Error(`'${guess}' is not in the word list.`);
+    throw new GuessInvalidError(guess);
   }
 };
 

@@ -9,3 +9,25 @@
     transform: rotateX(90deg);
   }
 }
+
+@keyframes shake {
+  10% {
+    transform: translateX(calc(var(--shake-offset) * -1));
+  }
+
+  30% {
+    transform: translateX(var(--shake-offset));
+  }
+
+  50% {
+    transform: translateX(calc(var(--shake-offset) * -2));
+  }
+
+  70% {
+    transform: translateX(calc(var(--shake-offset) * 2));
+  }
+
+  90% {
+    transform: translateX(calc(var(--shake-offset) * -1));
+  }
+}

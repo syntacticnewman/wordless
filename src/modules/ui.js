@@ -1,33 +1,50 @@
 const queryAllRows = () => document.querySelectorAll(".guess.row");
 
-const queryRow = (index) => queryAllRows()[index];
+const queryRow = (index) => queryAllRows().item(index);
 
-const queryBoxes = (node) => node.querySelectorAll(".box");
+const queryBoxes = (row) => row.querySelectorAll(".box");
 
-const renderLetters = (node, letters) => {
-  const boxes = Array.from(queryBoxes(node));
+const renderLetters = (index, letters) => {
+  const row = queryRow(index);
 
-  boxes.forEach((box, index) => {
-    if (typeof letters[index] === "string") {
-      box.textContent = letters[index];
-      box.classList.add("letter");
-    } else {
-      box.textContent = "";
-      box.classList.remove("letter");
-    }
-  });
+  if (row) {
+    // remove previous error state
+    row.classList.remove("guess--invalid");
+
+    queryBoxes(row).forEach((box, index) => {
+      if ("string" === typeof letters[index]) {
+        box.textContent = letters[index];
+        box.classList.add("letter");
+      } else {
+        box.textContent = "";
+        box.classList.remove("letter");
+      }
+    });
+  }
 };
 
-const renderFeedback = (node, feedback) => {
-  Array.from(queryBoxes(node)).forEach((box, index) => {
-    if (typeof feedback[index] === "string") {
-      box.classList.replace("letter", `letter--${feedback[index]}`);
-    }
-  });
+const renderLettersFeedback = (index, feedback) => {
+  const row = queryRow(index);
+
+  if (row) {
+    queryBoxes(row).forEach((box, index) => {
+      if ("string" === typeof feedback[index]) {
+        box.classList.add("letter--flip", `letter--${feedback[index]}`);
+      }
+    });
+  }
+};
+
+const renderGuessFeedback = (index) => {
+  const row = queryRow(index);
+
+  if (row) {
+    row.classList.add("guess--invalid");
+  }
 };
 
 export default {
-  queryRow,
-  renderFeedback,
+  renderGuessFeedback,
   renderLetters,
+  renderLettersFeedback,
 };
