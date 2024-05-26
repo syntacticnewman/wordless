@@ -48,7 +48,9 @@ const handleOnBufferChange = (buffer) => {
 };
 
 const handleOnEnter = async (buffer) => {
-  if (Game.isOver()) return;
+  if (Game.isOver() || buffer.isEmpty() || wordless.store.getState().loading) {
+    return;
+  }
 
   startLoading();
 
