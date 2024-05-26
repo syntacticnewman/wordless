@@ -6,7 +6,6 @@
 header {
   background-color: var(--white);
   border-bottom: 1px solid var(--light-gray);
-  padding: 5px 0;
 }
 
 /* Title */
@@ -59,14 +58,10 @@ header h1 span.gray {
 
 .board {
   margin: 0 auto;
-  padding: 1.5rem 0;
+  padding: 1rem 0;
 }
 
 /* Styles for guesses */
-
-.guess {
-  margin-bottom: 5px;
-}
 
 .guess--invalid {
   animation: shake var(--shake-speed) cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -124,10 +119,23 @@ header h1 span.gray {
 /* Responsive min-width: 425px */
 
 @media (min-width: 425px) {
+  /* Responsive header */
+
+  header {
+    padding: 5px 0;
+  }
+
   /* Responsive board */
 
   .board {
     max-width: calc(var(--box-size-larger) * 5 + 20px);
+    padding: 1.5rem 0;
+  }
+
+  /* Responsive guess */
+
+  .guess {
+    margin-bottom: 5px;
   }
 
   /* Responsive box */
