@@ -6,12 +6,12 @@
 header {
   background-color: var(--white);
   border-bottom: 1px solid var(--light-gray);
-  padding: 5px 0;
 }
 
 /* Title */
 
 header h1 {
+  font-family: var(--serif);
   text-align: center;
 }
 
@@ -45,27 +45,23 @@ header h1 span.gray {
 }
 
 .box {
-  border: 1px solid var(--light-gray);
-  border-radius: 3px;
-  width: var(--box-size);
-  height: var(--box-size);
-  display: flex;
   align-items: center;
+  border-radius: 3px;
+  border: 1px solid var(--light-gray);
+  display: flex;
+  height: var(--box-size);
   justify-content: center;
+  width: var(--box-size);
 }
 
 /* Styles for board */
 
 .board {
   margin: 0 auto;
-  padding: 1.5rem 0;
+  padding: 1rem 0;
 }
 
 /* Styles for guesses */
-
-.guess {
-  margin-bottom: 5px;
-}
 
 .guess--invalid {
   animation: shake var(--shake-speed) cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -74,34 +70,34 @@ header h1 span.gray {
 .guess--invalid > [class*="letter"] {
   border: 1px solid var(--red);
   color: var(--red);
-  transition-property: border, color;
   transition-duration: calc(var(--shake-speed) / 2);
+  transition-property: border, color;
   transition-timing-function: ease-in;
 }
 
 .guess--correct > [class*="letter"] {
-  animation-name: win;
-  animation-duration: var(--win-speed);
-  animation-timing-function: ease-in-out;
   animation-delay: calc(var(--win-interval) * var(--i));
+  animation-duration: var(--win-speed);
+  animation-name: win;
+  animation-timing-function: ease-in-out;
 }
 
 /* Styles for letters */
 
 [class*="letter"] {
+  animation: typing var(--typing-speed) ease-out;
   background-color: var(--white);
   border: 1px solid var(--black);
   font-size: 2rem;
   font-weight: bold;
   text-transform: uppercase;
-  animation: typing var(--typing-speed) ease-out;
 }
 
 .letter--flip {
   animation: flip var(--flip-speed) ease-in;
-  transition-property: color, background-color;
-  transition-duration: 50ms;
   transition-delay: calc(var(--flip-speed) / 2);
+  transition-duration: 50ms;
+  transition-property: color, background-color;
   transition-timing-function: ease-out;
 }
 
@@ -123,16 +119,29 @@ header h1 span.gray {
 /* Responsive min-width: 425px */
 
 @media (min-width: 425px) {
+  /* Responsive header */
+
+  header {
+    padding: 5px 0;
+  }
+
   /* Responsive board */
 
   .board {
     max-width: calc(var(--box-size-larger) * 5 + 20px);
+    padding: 1.5rem 0;
+  }
+
+  /* Responsive guess */
+
+  .guess {
+    margin-bottom: 5px;
   }
 
   /* Responsive box */
 
   .box {
-    width: var(--box-size-larger);
     height: var(--box-size-larger);
+    width: var(--box-size-larger);
   }
 }
