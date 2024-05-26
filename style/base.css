@@ -9,7 +9,8 @@
   --green: #91bf63;
   --red: #c53a50;
   /* Font */
-  --font-family: sans-serif;
+  --serif: "Suez One", serif;
+  --sans: sans-serif;
   --font-size: 1rem;
   /* Box */
   --box-size: 56px;
@@ -38,7 +39,7 @@ html {
 body {
   background-color: var(--paper-white);
   color: var(--black);
-  font-family: var(--font-family);
+  font-family: var(--sans);
   font-size: var(--font-size);
   margin: 0;
   padding: 0;

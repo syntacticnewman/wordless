@@ -12,6 +12,7 @@ header {
 /* Title */
 
 header h1 {
+  font-family: var(--serif);
   text-align: center;
 }
 
