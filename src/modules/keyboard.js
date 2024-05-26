@@ -1,4 +1,4 @@
-import buffer from "../services/buffer.js";
+import Buffer from "../services/buffer.js";
 
 const isLetter = (key) => /^[A-Za-z\u00f1\u00d1]$/.test(key);
 
@@ -12,13 +12,13 @@ const handleKey = (onBufferChange, onEnter) => (event) => {
   const key = event.key;
 
   if (isLetter(key)) {
-    buffer.push(key);
-    onBufferChange(buffer);
+    Buffer.push(key);
+    onBufferChange(Buffer);
   } else if (isBackSpace(key)) {
-    buffer.pop();
-    onBufferChange(buffer);
+    Buffer.pop();
+    onBufferChange(Buffer);
   } else if (isEnter(key)) {
-    onEnter(buffer);
+    onEnter(Buffer);
   }
 };
 
