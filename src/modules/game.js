@@ -95,19 +95,16 @@ const provideFeedback = (guess) => {
   return feedback;
 };
 
-const submitGuess = async (guess, { onSuccess, onError }) => {
-  try {
-    await validateGuess(guess);
-    processGuess(guess);
-    onSuccess(provideFeedback(guess));
-  } catch (error) {
-    onError(error);
-  }
+const submitGuess = async (guess) => {
+  await validateGuess(guess);
+
+  processGuess(guess);
+
+  return provideFeedback(guess);
 };
 
-const init = async ({ onInit }) => {
+const init = async () => {
   $secretWord = await API.fetchWordOfTheDay();
-  onInit();
 };
 
 export default {

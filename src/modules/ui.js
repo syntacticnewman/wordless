@@ -52,9 +52,25 @@ const renderGameOverFeedback = (index, win) => {
   }, 500);
 };
 
+const querySpinner = () => document.querySelector(".spinner");
+
+const startLoading = () => {
+  const spinner = querySpinner();
+
+  spinner.classList.add("spinner--loading");
+};
+
+const stopLoading = () => {
+  const spinner = querySpinner();
+
+  spinner.classList.remove("spinner--loading");
+};
+
 export default {
   renderGameOverFeedback,
   renderGuessFeedback,
   renderLetters,
   renderLettersFeedback,
+  startLoading,
+  stopLoading,
 };
