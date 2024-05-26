@@ -11,8 +11,9 @@ header {
 /* Title */
 
 header h1 {
+  display: flex;
   font-family: var(--serif);
-  text-align: center;
+  justify-content: center;
 }
 
 header h1 span.yellow {
@@ -25,6 +26,20 @@ header h1 span.green {
 
 header h1 span.gray {
   color: var(--dark-gray);
+}
+
+/* Styles for spinner */
+
+.spinner {
+  display: inline-block;
+  margin-inline-start: -0.15rem;
+}
+
+.spinner--loading {
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-name: spin;
+  animation-timing-function: ease-out;
 }
 
 /* Styles for the grid layout */
