@@ -1,11 +1,13 @@
 @import "./base.css";
 @import "./keyframes.css";
+@import "./virtual-keyboard.css";
 
 /* Header section */
 
 header {
   background-color: var(--white);
   border-bottom: 1px solid var(--light-gray);
+  height: var(--header-height);
 }
 
 /* Title */
@@ -40,6 +42,14 @@ header h1 span.gray {
   animation-iteration-count: infinite;
   animation-name: spin;
   animation-timing-function: ease-out;
+}
+
+/* Styles for main */
+
+.main {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - var(--header-height));
 }
 
 /* Styles for the grid layout */
@@ -129,34 +139,4 @@ header h1 span.gray {
 .letter--incorrect {
   color: var(--white);
   background-color: var(--dark-gray);
-}
-
-/* Responsive min-width: 425px */
-
-@media (min-width: 425px) {
-  /* Responsive header */
-
-  header {
-    padding: 5px 0;
-  }
-
-  /* Responsive board */
-
-  .board {
-    max-width: calc(var(--box-size-larger) * 5 + 20px);
-    padding: 1.5rem 0;
-  }
-
-  /* Responsive guess */
-
-  .guess {
-    margin-bottom: 5px;
-  }
-
-  /* Responsive box */
-
-  .box {
-    height: var(--box-size-larger);
-    width: var(--box-size-larger);
-  }
 }
