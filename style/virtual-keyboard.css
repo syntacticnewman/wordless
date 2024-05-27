@@ -1,0 +1,70 @@
+/* Virtual Keyboard container */
+
+.virtual-keyboard {
+  align-items: flex-end;
+  display: flex;
+  flex-basis: 100%;
+  justify-content: center;
+  padding-bottom: 1rem;
+}
+
+/* Keyboard layout */
+
+.keyboard-layout {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 5px;
+  margin: 0 auto;
+}
+
+/* Keyboard rows */
+
+.key-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 5px;
+  justify-content: center;
+}
+
+/* Keyboard keys */
+
+.key-row > .button.key {
+  background-color: var(--light-gray);
+  border-radius: 3px;
+  border: 0;
+  color: var(--black);
+  font-size: 1rem;
+  font-weight: bold;
+  min-height: 2.5rem;
+  min-width: 1.5rem;
+  padding: 0;
+  text-transform: capitalize;
+  transition-duration: 50ms;
+  transition-property: min-height, min-width;
+  user-select: none;
+}
+
+.key-row > .special.button.key {
+  font-size: 85%;
+  font-weight: normal;
+  min-width: 3rem;
+  padding: 0 0.5rem;
+}
+
+/* Responsive min-width: 375px */
+
+@media (min-width: 375px) {
+  /* Responsive keyboard keys */
+
+  .key-row > .button.key {
+    min-height: 3rem;
+    min-width: 2rem;
+  }
+
+  .key-row > .special.button.key {
+    font-size: 90%;
+    min-width: 3.5rem;
+  }
+}

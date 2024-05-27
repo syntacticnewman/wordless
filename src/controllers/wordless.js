@@ -39,7 +39,7 @@ const handleSubmitError = (error) => {
   }, 500);
 };
 
-const handleOnBufferChange = (buffer) => {
+const handleOnInput = (buffer) => {
   if (Game.isOver()) return;
 
   const currentGuess = Game.getCurrentGuessNumber();
@@ -78,12 +78,12 @@ const start = async () => {
   startLoading();
 
   try {
-    await Game.init();
-
     Keyboard.init({
-      onBufferChange: (buffer) => handleOnBufferChange(buffer),
+      onInput: (buffer) => handleOnInput(buffer),
       onEnter: (buffer) => handleOnEnter(buffer),
     });
+
+    await Game.init();
   } catch (e) {
     console.error(e);
   } finally {
