@@ -42,12 +42,20 @@ const createKeyboardLayout = (layout) => {
   return keyboardLayout;
 };
 
-const create = (layout) => {
+const create = (layout, onKeyPressed) => {
   const virtualKeyboard = document.createElement("div");
 
   virtualKeyboard.classList.add("virtual-keyboard");
 
   virtualKeyboard.appendChild(createKeyboardLayout(layout));
+
+  virtualKeyboard.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    if (event.target.classList.contains("virtual-key")) {
+      onKeyPressed(event.target.dataset.key);
+    }
+  });
 
   return virtualKeyboard;
 };
