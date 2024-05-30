@@ -1,19 +1,22 @@
-const createKeyButton = (key) => {
+const createVirtualKey = (key) => {
   const btn = document.createElement("button");
 
-  btn.classList.add("button", "key");
+  btn.classList.add("virtual-key");
 
-  if ("E" === key) {
-    btn.textContent = "Enter";
-    btn.dataset.key = "Enter";
-    btn.classList.add("special");
-  } else if ("B" === key) {
-    btn.textContent = "Del";
-    btn.dataset.key = "Backspace";
-    btn.classList.add("special");
-  } else {
-    btn.textContent = key;
-    btn.dataset.key = key;
+  switch (key) {
+    case /* Enter */ "E":
+      btn.textContent = "Enter";
+      btn.dataset.key = "Enter";
+      btn.classList.add("special");
+      break;
+    case /* Backspace */ "B":
+      btn.textContent = "Del";
+      btn.dataset.key = "Backspace";
+      btn.classList.add("special");
+      break;
+    default: /* letter */
+      btn.textContent = key;
+      btn.dataset.key = key;
   }
 
   return btn;
@@ -24,23 +27,31 @@ const createKeyRow = (keys) => {
 
   keyRow.classList.add("key-row");
 
-  keyRow.append(...keys.split("").map(createKeyButton));
+  keyRow.append(...keys.split("").map(createVirtualKey));
 
   return keyRow;
 };
 
-const render = (layout, parent, onClick) => {
-  const keyboard = document.createElement("div");
+const createKeyboardLayout = (layout) => {
+  const keyboardLayout = document.createElement("div");
 
-  keyboard.classList.add("keyboard-layout");
+  keyboardLayout.classList.add("keyboard-layout");
 
-  keyboard.append(...layout.split("\n").map(createKeyRow));
+  keyboardLayout.append(...layout.split("\n").map(createKeyRow));
 
-  keyboard.addEventListener("click", onClick);
+  return keyboardLayout;
+};
 
-  parent.appendChild(keyboard);
+const create = (layout) => {
+  const virtualKeyboard = document.createElement("div");
+
+  virtualKeyboard.classList.add("virtual-keyboard");
+
+  virtualKeyboard.appendChild(createKeyboardLayout(layout));
+
+  return virtualKeyboard;
 };
 
 export default {
-  render,
+  create,
 };
