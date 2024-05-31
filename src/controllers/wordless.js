@@ -1,6 +1,6 @@
 import Game from "../modules/game.js";
 import Input from "./input.js";
-import UI from "../modules/ui.js";
+import UI from "./ui.js";
 
 const handleSubmitSuccess = (buffer, feedback) => {
   buffer.flush();
