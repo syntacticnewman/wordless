@@ -92,7 +92,7 @@ header h1 span.gray {
   animation: shake var(--shake-speed) cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-.guess--invalid > [class*="letter"] {
+.guess--invalid > .letter {
   border: 1px solid var(--red);
   color: var(--red);
   transition-duration: calc(var(--shake-speed) / 2);
@@ -100,7 +100,7 @@ header h1 span.gray {
   transition-timing-function: ease-in;
 }
 
-.guess--correct > [class*="letter"] {
+.guess--correct > .letter {
   animation-delay: calc(var(--win-interval) * var(--i));
   animation-duration: var(--win-speed);
   animation-name: win;
@@ -109,7 +109,7 @@ header h1 span.gray {
 
 /* Styles for letters */
 
-[class*="letter"] {
+.letter {
   animation: typing var(--typing-speed) ease-out;
   background-color: var(--white);
   border: 1px solid var(--black);

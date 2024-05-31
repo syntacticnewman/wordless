@@ -30,7 +30,7 @@
 
 /* Keyboard keys */
 
-.key-row > .virtual-key {
+.virtual-key {
   background-color: var(--light-gray);
   border-radius: 3px;
   border: 0;
@@ -46,7 +46,7 @@
   user-select: none;
 }
 
-.key-row > .special.virtual-key {
+.special.virtual-key {
   font-size: 85%;
   font-weight: normal;
   min-width: 3rem;
@@ -58,12 +58,12 @@
 @media (min-width: 375px) {
   /* Responsive keyboard keys */
 
-  .key-row > .virtual-key {
+  .virtual-key {
     min-height: 3rem;
     min-width: 2rem;
   }
 
-  .key-row > .special.virtual-key {
+  .special.virtual-key {
     font-size: 90%;
     min-width: 3.5rem;
   }
