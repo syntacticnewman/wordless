@@ -1,5 +1,5 @@
 import Game from "../modules/game.js";
-import Keyboard from "../modules/keyboard.js";
+import Input from "./input.js";
 import UI from "../modules/ui.js";
 
 const handleSubmitSuccess = (buffer, feedback) => {
@@ -78,7 +78,7 @@ const start = async () => {
   startLoading();
 
   try {
-    Keyboard.init({
+    Input.init({
       onInput: (buffer) => handleOnInput(buffer),
       onEnter: (buffer) => handleOnEnter(buffer),
     });
