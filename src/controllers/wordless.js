@@ -1,6 +1,30 @@
 import Game from "../modules/game.js";
 import Input from "./input.js";
-import UI from "../modules/ui.js";
+import UI from "./ui.js";
+
+const updateKeyHistory = (feedback) => {
+  const keyHistory = wordless.store.getState().keyHistory;
+  const order = {
+    correct: 2,
+    wrong: 1,
+    incorrect: 0,
+  };
+
+  feedback.forEach(({ letter, result }) => {
+    if ("undefined" === typeof keyHistory[letter]) {
+      keyHistory[letter] = result;
+      return;
+    }
+
+    if (order[keyHistory[letter]] < order[result]) {
+      keyHistory[letter] = result;
+    }
+  });
+
+  wordless.store.setState({ ...wordless.store.getState(), keyHistory });
+
+  return keyHistory;
+};
 
 const handleSubmitSuccess = (buffer, feedback) => {
   buffer.flush();
@@ -8,6 +32,10 @@ const handleSubmitSuccess = (buffer, feedback) => {
   const previousGuess = Game.getCurrentGuessNumber() - 1;
 
   UI.renderLettersFeedback(previousGuess, feedback);
+
+  const keyHistory = updateKeyHistory(feedback);
+
+  UI.renderVirtualKeysFeedback(keyHistory);
 
   if (Game.isOver()) {
     UI.renderGameOverFeedback(previousGuess, Game.hasPlayerWon());
@@ -65,12 +93,12 @@ const handleOnEnter = async (buffer) => {
 };
 
 const startLoading = () => {
-  wordless.store.setState({ loading: true });
+  wordless.store.setState({ ...wordless.store.getState(), loading: true });
   UI.startLoading();
 };
 
 const stopLoading = () => {
-  wordless.store.setState({ loading: false });
+  wordless.store.setState({ ...wordless.store.getState(), loading: false });
   UI.stopLoading();
 };
 
