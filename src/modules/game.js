@@ -71,25 +71,25 @@ const provideFeedback = (guess) => {
     secretLetters.splice(secretLetters.indexOf(letter), 1);
   };
 
+  // feedback for letters in the correct position
   for (let i = 0; i < guess.length; i++) {
-    const currentLetter = guess.charAt(i);
-
-    // letter is in the correct position
-    if (isEqualString(currentLetter, $secretWord.charAt(i))) {
+    if (isEqualString(guess.charAt(i), $secretWord.charAt(i))) {
       feedback.push("correct");
-      removeSecretLetter(currentLetter);
-      continue;
+      removeSecretLetter(guess.charAt(i));
+    } else {
+      feedback.push("incorrect");
     }
+  }
 
-    // letter is present but in the wrong position
-    if (secretLetters.includes(currentLetter)) {
-      feedback.push("wrong");
-      removeSecretLetter(currentLetter);
-      continue;
+  // feedback for letters in the wrong position
+  for (let i = 0; i < guess.length; i++) {
+    // ignore current letter if is already correct
+    if ("correct" == feedback[i]) continue;
+
+    if (secretLetters.includes(guess.charAt(i))) {
+      feedback[i] = "wrong";
+      removeSecretLetter(guess.charAt(i));
     }
-
-    // letter is not in the word at all
-    feedback.push("incorrect");
   }
 
   return feedback;
