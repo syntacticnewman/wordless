@@ -25,8 +25,8 @@ const renderLettersFeedback = (index, feedback) => {
   const row = queryRow(index);
 
   queryBoxes(row).forEach((box, i) => {
-    if ("string" === typeof feedback[i]) {
-      box.classList.add("letter--flip", `letter--${feedback[i]}`);
+    if ("string" === typeof feedback[i].result) {
+      box.classList.add("letter--flip", `letter--${feedback[i].result}`);
     }
   });
 };

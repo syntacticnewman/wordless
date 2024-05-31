@@ -74,20 +74,20 @@ const provideFeedback = (guess) => {
   // feedback for letters in the correct position
   for (let i = 0; i < guess.length; i++) {
     if (isEqualString(guess.charAt(i), $secretWord.charAt(i))) {
-      feedback.push("correct");
+      feedback.push({ letter: guess.charAt(i), result: "correct" });
       removeSecretLetter(guess.charAt(i));
     } else {
-      feedback.push("incorrect");
+      feedback.push({ letter: guess.charAt(i), result: "incorrect" });
     }
   }
 
   // feedback for letters in the wrong position
   for (let i = 0; i < guess.length; i++) {
     // ignore current letter if is already correct
-    if ("correct" == feedback[i]) continue;
+    if ("correct" == feedback[i].result) continue;
 
     if (secretLetters.includes(guess.charAt(i))) {
-      feedback[i] = "wrong";
+      feedback[i].result = "wrong";
       removeSecretLetter(guess.charAt(i));
     }
   }
