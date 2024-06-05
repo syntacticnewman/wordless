@@ -141,3 +141,13 @@ header h1 span.gray {
   color: var(--white);
   background-color: var(--dark-gray);
 }
+
+/* Virtual Keyboard Component */
+
+virtual-keyboard {
+  align-items: flex-end;
+  display: flex;
+  flex-basis: 100%;
+  justify-content: center;
+  padding-bottom: 1rem;
+}
