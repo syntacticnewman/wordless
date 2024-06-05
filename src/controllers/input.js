@@ -1,8 +1,5 @@
 import Buffer from "../services/buffer.js";
-import VirtualKeyboard from "../modules/virtual-keyboard.js";
-import { isBackSpace, isEnter, isLetter, layout } from "../modules/keyboard.js";
-
-const defaultLanguage = "en"; // English
+import { isBackSpace, isEnter, isLetter } from "../modules/keyboard.js";
 
 let _onInput = (buffer) => console.info("Buffer.onChange->", buffer.getValue());
 let _onEnter = (buffer) => console.info("Buffer.onEnter->", buffer.getValue());
@@ -53,13 +50,11 @@ const processKey = (key, virtual = false) => {
   }
 };
 
-const init = ({ onInput, onEnter, language = defaultLanguage }) => {
+const init = ({ onInput, onEnter }) => {
   // virtual keyboard
-  document
-    .querySelector(".main")
-    .appendChild(
-      VirtualKeyboard.create(layout[language], (key) => processKey(key, true))
-    );
+  document.addEventListener("virtualkeypressed", (event) => {
+    processKey(event.detail.key, true);
+  });
 
   // physical keyboard
   document.addEventListener("keyup", (event) => {

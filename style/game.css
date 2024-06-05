@@ -1,6 +1,5 @@
 @import "./base.css";
 @import "./keyframes.css";
-@import "./virtual-keyboard.css";
 
 /* Header section */
 
@@ -126,6 +125,8 @@ header h1 span.gray {
   transition-timing-function: ease-out;
 }
 
+/* Feedback states */
+
 .letter--correct {
   color: var(--white);
   background-color: var(--green);
@@ -139,4 +140,14 @@ header h1 span.gray {
 .letter--incorrect {
   color: var(--white);
   background-color: var(--dark-gray);
+}
+
+/* Virtual Keyboard Component */
+
+virtual-keyboard {
+  align-items: flex-end;
+  display: flex;
+  flex-basis: 100%;
+  justify-content: center;
+  padding-bottom: 1rem;
 }

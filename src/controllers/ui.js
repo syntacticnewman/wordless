@@ -4,7 +4,10 @@ const queryRow = (index) => queryAllRows().item(index);
 
 const queryBoxes = (row) => row.querySelectorAll(".box");
 
-const queryVirtualKeys = () => document.querySelectorAll(".virtual-key");
+const queryVirtualKeys = () =>
+  document
+    .querySelector("virtual-keyboard")
+    .shadowRoot.querySelectorAll(".virtual-key");
 
 const renderLetters = (index, letters) => {
   const row = queryRow(index);
@@ -74,15 +77,9 @@ const renderVirtualKeysFeedback = (keyHistory) => {
     queryVirtualKeys().forEach((virtualKey) => {
       if ("string" === typeof keyHistory[virtualKey.dataset.key]) {
         // clean previous feedback
-        virtualKey.classList.remove(
-          "letter--correct",
-          "letter--wrong",
-          "letter--incorrect"
-        );
+        virtualKey.classList.remove("correct", "wrong", "incorrect");
         // set new feedback
-        virtualKey.classList.add(
-          `letter--${keyHistory[virtualKey.dataset.key]}`
-        );
+        virtualKey.classList.add(keyHistory[virtualKey.dataset.key]);
       }
     });
   }, 500);
