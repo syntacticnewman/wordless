@@ -1,13 +1,25 @@
 import Buffer from "../services/buffer.js";
 import { isBackSpace, isEnter, isLetter } from "../modules/keyboard.js";
 
-let _onInput = (buffer) => console.info("Buffer.onChange->", buffer.getValue());
-let _onEnter = (buffer) => console.info("Buffer.onEnter->", buffer.getValue());
+export const INPUT_CHANGE_EVENT = "winputchange";
+export const INPUT_SUBMIT_EVENT = "winputsubmit";
 
 const isActiveElementVirtual = () =>
   document.activeElement.classList.contains("virtual-key");
 
 const removeActiveElementFocus = () => document.activeElement.blur();
+
+const notifyInputChange = () => {
+  document.dispatchEvent(
+    new CustomEvent(INPUT_CHANGE_EVENT, { detail: Buffer.getValue() })
+  );
+};
+
+const notifyInputSubmit = () => {
+  document.dispatchEvent(
+    new CustomEvent(INPUT_SUBMIT_EVENT, { detail: Buffer.getValue() })
+  );
+};
 
 const processLetterKey = (key, virtual) => {
   // When the key pressed is a physical key
@@ -19,13 +31,13 @@ const processLetterKey = (key, virtual) => {
 
   Buffer.push(key);
 
-  _onInput(Buffer);
+  notifyInputChange();
 };
 
 const processBackspaceKey = () => {
   Buffer.pop();
 
-  _onInput(Buffer);
+  notifyInputChange();
 };
 
 const processEnterKey = (virtual) => {
@@ -37,7 +49,7 @@ const processEnterKey = (virtual) => {
     return;
   }
 
-  _onEnter(Buffer);
+  notifyInputSubmit();
 };
 
 const processKey = (key, virtual = false) => {
@@ -50,7 +62,11 @@ const processKey = (key, virtual = false) => {
   }
 };
 
-const init = ({ onInput, onEnter }) => {
+const clear = () => {
+  Buffer.flush();
+};
+
+const init = () => {
   // virtual keyboard
   document.addEventListener("virtualkeypressed", (event) => {
     processKey(event.detail.key, true);
@@ -61,11 +77,6 @@ const init = ({ onInput, onEnter }) => {
     event.preventDefault();
     processKey(event.key);
   });
-
-  // subscribers
-  // TODO: implement an observer pattern for this?
-  _onInput = "function" === typeof onInput ? onInput : _onInput;
-  _onEnter = "function" === typeof onEnter ? onEnter : _onEnter;
 };
 
-export default { init };
+export default { init, clear };

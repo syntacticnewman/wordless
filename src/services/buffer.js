@@ -20,15 +20,9 @@ const flush = () => {
 
 const getValue = () => buffer;
 
-const toArray = () => buffer.split("");
-
-const isEmpty = () => 0 === buffer.length;
-
 export default {
   flush,
   getValue,
-  isEmpty,
   pop,
   push,
-  toArray,
 };

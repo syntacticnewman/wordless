@@ -1,5 +1,5 @@
 import Game from "../modules/game.js";
-import Input from "./input.js";
+import Input, { INPUT_CHANGE_EVENT, INPUT_SUBMIT_EVENT } from "./input.js";
 import UI from "./ui.js";
 
 const updateKeyHistory = (feedback) => {
@@ -26,8 +26,8 @@ const updateKeyHistory = (feedback) => {
   return keyHistory;
 };
 
-const handleSubmitSuccess = (buffer, feedback) => {
-  buffer.flush();
+const handleSubmitSuccess = (feedback) => {
+  Input.clear();
 
   const previousGuess = Game.getCurrentGuessNumber() - 1;
 
@@ -67,24 +67,24 @@ const handleSubmitError = (error) => {
   }, 500);
 };
 
-const handleOnInput = (buffer) => {
+const handleOnInputChange = (value) => {
   if (Game.isOver()) return;
 
   const currentGuess = Game.getCurrentGuessNumber();
 
-  UI.renderLetters(currentGuess, buffer.toArray());
+  UI.renderLetters(currentGuess, value.split(""));
 };
 
-const handleOnEnter = async (buffer) => {
-  if (Game.isOver() || buffer.isEmpty() || wordless.store.getState().loading) {
+const handleOnInputSubmit = async (value) => {
+  if (Game.isOver() || !value || wordless.store.getState().loading) {
     return;
   }
 
   startLoading();
 
   try {
-    const feedback = await Game.submitGuess(buffer.getValue());
-    handleSubmitSuccess(buffer, feedback);
+    const feedback = await Game.submitGuess(value);
+    handleSubmitSuccess(feedback);
   } catch (error) {
     handleSubmitError(error);
   } finally {
@@ -103,14 +103,19 @@ const stopLoading = () => {
 };
 
 const start = async () => {
+  Input.init();
+
+  document.addEventListener(INPUT_CHANGE_EVENT, (event) => {
+    handleOnInputChange(event.detail);
+  });
+
+  document.addEventListener(INPUT_SUBMIT_EVENT, (event) => {
+    handleOnInputSubmit(event.detail);
+  });
+
   startLoading();
 
   try {
-    Input.init({
-      onInput: (buffer) => handleOnInput(buffer),
-      onEnter: (buffer) => handleOnEnter(buffer),
-    });
-
     await Game.init();
   } catch (e) {
     console.error(e);
