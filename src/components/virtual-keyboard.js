@@ -75,20 +75,18 @@ const createVirtualKeyboard = (layout) => {
 };
 
 class VirtualKeyboard extends HTMLElement {
+  constructor() {
+    super();
+
+    this.language = document.documentElement.lang;
+
+    // use the layout in the document's language or the layout in English as a fallback
+    this.layout = LAYOUT[this.language] ?? LAYOUT[defaultLanguage];
+
+    this.root = this.attachShadow({ mode: "open" });
+  }
   connectedCallback() {
-    const language = document.documentElement.lang;
-
-    let layout = LAYOUT[language];
-
-    if ("undefined" === typeof layout) {
-      console.warn(
-        `Language '${language}' not supported. Falling back to '${defaultLanguage}' language.`
-      );
-
-      layout = LAYOUT[defaultLanguage];
-    }
-
-    this.appendChild(createVirtualKeyboard(layout));
+    this.root.appendChild(createVirtualKeyboard(this.layout));
   }
 }
 
