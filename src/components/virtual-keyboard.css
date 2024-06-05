@@ -53,6 +53,23 @@
   padding: 0 0.5rem;
 }
 
+/* Feedback states */
+
+.virtual-key.correct {
+  color: var(--white);
+  background-color: var(--green);
+}
+
+.virtual-key.wrong {
+  color: var(--white);
+  background-color: var(--yellow);
+}
+
+.virtual-key.incorrect {
+  color: var(--white);
+  background-color: var(--dark-gray);
+}
+
 /* Responsive min-width: 375px */
 
 @media (min-width: 375px) {

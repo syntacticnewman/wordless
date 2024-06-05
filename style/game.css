@@ -125,6 +125,8 @@ header h1 span.gray {
   transition-timing-function: ease-out;
 }
 
+/* Feedback states */
+
 .letter--correct {
   color: var(--white);
   background-color: var(--green);
