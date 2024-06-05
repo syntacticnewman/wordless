@@ -6,11 +6,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Secular+One&family=Suez+One&display=swap"
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Secular+One&family=Suez+One&display=swap"
+    />
+    <!-- This prevents FOUC -->
+    <link
+      rel="preload"
+      href="./src/components/virtual-keyboard.css"
+      as="style"
     />
     <link rel="stylesheet" href="./style/game.css" />
-    <script type="module" src="./src/index.js"></script>
+    <script type="module" src="./src/index.js" defer></script>
     <title>Wordless</title>
   </head>
   <body>

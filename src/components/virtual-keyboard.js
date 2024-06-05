@@ -84,7 +84,16 @@ class VirtualKeyboard extends HTMLElement {
     this.layout = LAYOUT[this.language] ?? LAYOUT[defaultLanguage];
 
     this.root = this.attachShadow({ mode: "open" });
+
+    // load CSS
+    const stylesLink = document.createElement("link");
+
+    stylesLink.setAttribute("rel", "stylesheet");
+    stylesLink.setAttribute("href", "src/components/virtual-keyboard.css");
+
+    this.root.appendChild(stylesLink);
   }
+
   connectedCallback() {
     this.root.appendChild(createVirtualKeyboard(this.layout));
   }
