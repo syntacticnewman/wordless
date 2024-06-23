@@ -6,21 +6,21 @@ import {
 } from "./game-errors.js";
 
 const REQUIRED_GUESS_LENGTH = 5;
-const MAX_GUESSES = 6;
+const MAX_NUMBER_OF_GUESSES = 6;
 
 let $secretWord = "";
 
-let guesses = 0;
+let numberOfGuesses = 0;
 let gameOver = false;
 let win = false;
 
 const getState = () => ({
-  guesses,
+  numberOfGuesses,
   gameOver,
   win,
 });
 
-const getCurrentGuessNumber = () => getState().guesses;
+const getCurrentGuessNumber = () => getState().numberOfGuesses;
 
 const isOver = () => getState().gameOver;
 
@@ -48,8 +48,8 @@ const validateGuess = async (guess) => {
 };
 
 const processGuess = (guess) => {
-  if (guesses < MAX_GUESSES) {
-    guesses++;
+  if (numberOfGuesses < MAX_NUMBER_OF_GUESSES) {
+    numberOfGuesses++;
 
     if (isSecretWord(guess)) {
       gameOver = true;
@@ -57,7 +57,7 @@ const processGuess = (guess) => {
       return;
     }
 
-    if (guesses === MAX_GUESSES) {
+    if (numberOfGuesses === MAX_NUMBER_OF_GUESSES) {
       gameOver = true;
     }
   }
