@@ -30,9 +30,9 @@ const clear = () => {
 };
 
 /**
- * Checks if element is a virtual key.
+ * Checks if the element given element is the virtual keyboard.
  */
-const isVirtualKey = (element) => element.classList.contains("virtual-key");
+const isVirtualKeyBoard = (element) => "VIRTUAL-KEYBOARD" === element.tagName;
 
 /**
  * Removes focus from given element.
@@ -44,11 +44,11 @@ const removeFocus = (element) => element.blur();
  * it will add the letter to the input buffer
  * and dispatch an input change event.
  */
-const processLetterKey = (key, virtual) => {
+const processLetterKey = (key, virtualKey) => {
   // When the key pressed is a physical key
   // and previous focused key is virtual,
   // remove the focus of that key element.
-  if (!virtual && isVirtualKey(document.activeElement)) {
+  if (!virtualKey && isVirtualKeyBoard(document.activeElement)) {
     removeFocus(document.activeElement);
   }
 
@@ -73,12 +73,12 @@ const processBackspaceKey = () => {
  * it will dispatch a input submit event
  * except if the Enter key was pressed while focusing a virtual key.
  */
-const processEnterKey = (virtual) => {
+const processEnterKey = (virtualEnter) => {
   // If the physical Enter key is pressed over a focused virtual key,
   // do nothing, as the virtual key will be processed on its own.
   // This prevents accidental premature submission of a guess
   // while entering letters on the virtual keyboard.
-  if (!virtual && isVirtualKey(document.activeElement)) {
+  if (!virtualEnter && isVirtualKeyBoard(document.activeElement)) {
     return;
   }
 
@@ -89,13 +89,13 @@ const processEnterKey = (virtual) => {
  * Processes the key pressed depending on whether is a letter,
  * the Enter key or the Backspace key.
  */
-const processKey = (key, virtual = false) => {
+const processKey = (key, virtualKey = false) => {
   if (isLetter(key)) {
-    processLetterKey(key, virtual);
+    processLetterKey(key, virtualKey);
   } else if (isBackSpace(key)) {
     processBackspaceKey();
   } else if (isEnter(key)) {
-    processEnterKey(virtual);
+    processEnterKey(virtualKey);
   }
 };
 
