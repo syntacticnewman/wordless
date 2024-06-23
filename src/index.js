@@ -1,6 +1,6 @@
 import Store from "./services/store.js";
-import Wordless from "./controllers/wordless.js";
 import VirtualKeyboard from "./components/virtual-keyboard.js";
+import Wordless from "./controllers/wordless.js";
 
 window.wordless = {
   store: Store,
