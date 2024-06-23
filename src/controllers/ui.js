@@ -36,7 +36,7 @@ const renderLettersFeedback = (index, feedback) => {
   });
 };
 
-const renderGuessFeedback = (index) => {
+const renderInvalidGuessFeedback = (index) => {
   const row = queryRow(index);
 
   row.classList.add("guess--invalid");
@@ -87,7 +87,7 @@ const renderVirtualKeysFeedback = (keyHistory) => {
 
 export default {
   renderGameOverFeedback,
-  renderGuessFeedback,
+  renderInvalidGuessFeedback,
   renderLetters,
   renderLettersFeedback,
   renderVirtualKeysFeedback,

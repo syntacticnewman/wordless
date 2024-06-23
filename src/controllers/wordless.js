@@ -2,6 +2,10 @@ import Game from "../modules/game.js";
 import Input, { INPUT_CHANGE_EVENT, INPUT_SUBMIT_EVENT } from "./input.js";
 import UI from "./ui.js";
 
+/**
+ * Updates the key history to keep track of the letters the user has submitted
+ * to show them in their corresponding color in the virtual keyboard.
+ */
 const updateKeyHistory = (feedback) => {
   const keyHistory = wordless.store.getState().keyHistory;
   const order = {
@@ -26,6 +30,11 @@ const updateKeyHistory = (feedback) => {
   return keyHistory;
 };
 
+/**
+ * When guess submission is successful, clean the input buffer,
+ * then render the feedback for each letter both in the board and the virtual keyboard,
+ * finally if game is over, alert if player won or lost.
+ */
 const handleSubmitSuccess = (feedback) => {
   Input.clear();
 
@@ -51,11 +60,15 @@ const handleSubmitSuccess = (feedback) => {
   }
 };
 
+/**
+ * When submission results in an error and is related to the guess,
+ * render the invalid guess feedback, otherwise alert for any other unhandled error.
+ */
 const handleSubmitError = (error) => {
   if (/guess/i.test(error.name)) {
     const currentGuess = Game.getCurrentGuessNumber();
 
-    UI.renderGuessFeedback(currentGuess);
+    UI.renderInvalidGuessFeedback(currentGuess);
 
     return;
   }
@@ -67,6 +80,9 @@ const handleSubmitError = (error) => {
   }, 500);
 };
 
+/**
+ * Displays the letters as user is typing in the correct guess row.
+ */
 const handleOnInputChange = (value) => {
   if (Game.isOver()) return;
 
@@ -75,6 +91,9 @@ const handleOnInputChange = (value) => {
   UI.renderLetters(currentGuess, value.split(""));
 };
 
+/**
+ * Submits the guess and handles success and error scenarios.
+ */
 const handleOnInputSubmit = async (value) => {
   if (Game.isOver() || !value || wordless.store.getState().loading) {
     return;
@@ -92,16 +111,25 @@ const handleOnInputSubmit = async (value) => {
   }
 };
 
+/**
+ * Updates the store with loading state set to be true and shows the loading indicator.
+ */
 const startLoading = () => {
   wordless.store.setState({ ...wordless.store.getState(), loading: true });
   UI.startLoading();
 };
 
+/**
+ * Updates the store with loading state set to be false and hides the loading indicator.
+ */
 const stopLoading = () => {
   wordless.store.setState({ ...wordless.store.getState(), loading: false });
   UI.stopLoading();
 };
 
+/**
+ * Registers the event handlers for user input and initializes the game.
+ */
 const start = async () => {
   Input.init();
 
