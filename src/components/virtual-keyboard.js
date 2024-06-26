@@ -1,7 +1,7 @@
 const defaultLanguage = "en"; // English
 
 const LAYOUT = {
-  en: "qwertyuiop\nasdfghjkl\nEzxcvbnmB",
+  en: "qwertyuiop\nasdfghjkl\nBzxcvbnmE",
 };
 
 // This icon was designed by https://iconduck.com/designers/arturo-wibawa
