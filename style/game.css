@@ -149,6 +149,7 @@ virtual-keyboard {
   display: flex;
   justify-content: center;
   padding-bottom: 1rem;
+  min-height: 146px;
 }
 
 /* Responsive min-width: 375px */
@@ -158,5 +159,11 @@ virtual-keyboard {
 
   .board {
     max-height: 500px;
+  }
+
+  /* Responsive Virtual Keyboard */
+
+  virtual-keyboard {
+    min-height: 170px;
   }
 }
