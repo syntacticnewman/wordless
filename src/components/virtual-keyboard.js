@@ -4,6 +4,9 @@ const LAYOUT = {
   en: "qwertyuiop\nasdfghjkl\nEzxcvbnmB",
 };
 
+// This icon was designed by https://iconduck.com/designers/arturo-wibawa
+const backspaceIcon = `<svg fill="none" height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g stroke="var(--black)" stroke-linecap="round" stroke-width="2"><path d="m17 15-6-6m6 0-6 6"/><path d="M7.4 4.8A2 2 0 0 1 9 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H9a2 2 0 0 1-1.6-.8l-4.5-6a2 2 0 0 1 0-2.4z" stroke-linejoin="round"/></g></svg>`;
+
 const createVirtualKey = (key) => {
   const virtualKey = document.createElement("button");
 
@@ -11,20 +14,21 @@ const createVirtualKey = (key) => {
 
   switch (key) {
     case /* Enter */ "E":
-      virtualKey.textContent = "Enter";
       virtualKey.dataset.key = "Enter";
-      virtualKey.classList.add("special");
+      virtualKey.textContent = "Enter";
+      virtualKey.classList.add("enter-key");
       break;
 
     case /* Backspace */ "B":
-      virtualKey.textContent = "Del";
       virtualKey.dataset.key = "Backspace";
-      virtualKey.classList.add("special");
+      virtualKey.ariaLabel = "Delete";
+      virtualKey.innerHTML = backspaceIcon;
+      virtualKey.classList.add("backspace-key");
       break;
 
     default: /* letter */
-      virtualKey.textContent = key;
       virtualKey.dataset.key = key;
+      virtualKey.textContent = key;
   }
 
   return virtualKey;
@@ -60,11 +64,13 @@ const createVirtualKeyboard = (layout) => {
   virtualKeyboard.addEventListener("click", (event) => {
     event.preventDefault();
 
-    if ("BUTTON" === event.target.tagName) {
+    const virtualKey = event.target.closest(".virtual-key");
+
+    if (virtualKey) {
       document.dispatchEvent(
         new CustomEvent("virtualkeypressed", {
           detail: {
-            key: event.target.dataset.key,
+            key: virtualKey.dataset.key,
           },
         })
       );
