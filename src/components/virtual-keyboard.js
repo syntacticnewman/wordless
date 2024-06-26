@@ -80,6 +80,26 @@ const createVirtualKeyboard = (layout) => {
   return virtualKeyboard;
 };
 
+const addFocusTrap = (root) => {
+  const allKeys = root.querySelectorAll(".virtual-key");
+  const firstKey = allKeys.item(0);
+  const lastKey = allKeys.item(allKeys.length - 1);
+
+  firstKey.addEventListener("keydown", (event) => {
+    if ("Tab" === event.key && event.shiftKey) {
+      event.preventDefault();
+      lastKey.focus();
+    }
+  });
+
+  lastKey.addEventListener("keydown", (event) => {
+    if ("Tab" === event.key && !event.shiftKey) {
+      event.preventDefault();
+      firstKey.focus();
+    }
+  });
+};
+
 class VirtualKeyboard extends HTMLElement {
   constructor() {
     super();
@@ -91,7 +111,10 @@ class VirtualKeyboard extends HTMLElement {
 
     this.root = this.attachShadow({ mode: "open" });
 
-    // load CSS
+    this.loadCSS();
+  }
+
+  loadCSS() {
     const stylesLink = document.createElement("link");
 
     stylesLink.setAttribute("rel", "stylesheet");
@@ -101,7 +124,8 @@ class VirtualKeyboard extends HTMLElement {
   }
 
   connectedCallback() {
-    this.root.appendChild(createVirtualKeyboard(this.layout));
+    this.root.appendChild(createVirtualKeyboard(this.layout, this.root));
+    addFocusTrap(this.root);
   }
 }
 
