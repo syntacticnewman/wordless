@@ -124,7 +124,7 @@ class VirtualKeyboard extends HTMLElement {
   }
 
   connectedCallback() {
-    this.root.appendChild(createVirtualKeyboard(this.layout, this.root));
+    this.root.appendChild(createVirtualKeyboard(this.layout));
     addFocusTrap(this.root);
   }
 }
