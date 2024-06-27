@@ -100,6 +100,82 @@ const addFocusTrap = (root) => {
   });
 };
 
+const addArrowKeysNavigation = (root) => {
+  const findKeyIndex = (row, current) => {
+    return Array.from(row.children).findIndex((key) => current === key);
+  };
+
+  const getRightKey = (current) => {
+    const row = current.parentNode;
+    const i = findKeyIndex(row, current);
+
+    return row.children[(i + 1) % row.children.length];
+  };
+
+  const getLeftKey = (current) => {
+    const row = current.parentNode;
+    const i = findKeyIndex(row, current);
+
+    return row.children[(i - 1 + row.children.length) % row.children.length];
+  };
+
+  const getBottomKey = (current) => {
+    const row = current.parentNode;
+
+    if (!row.nextSibling) return null;
+
+    const i = findKeyIndex(row, current);
+    const nextRow = row.nextSibling;
+
+    if (i >= nextRow.children.length) {
+      return nextRow.children[nextRow.children.length - 1];
+    } else {
+      return nextRow.children[i];
+    }
+  };
+
+  const getTopKey = (current) => {
+    const row = current.parentNode;
+
+    if (!row.previousSibling) return null;
+
+    const i = findKeyIndex(row, current);
+    const prevRow = row.previousSibling;
+
+    if (i >= prevRow.children.length) {
+      return prevRow.children[prevRow.children.length - 1];
+    } else {
+      return prevRow.children[i];
+    }
+  };
+
+  root.addEventListener("keydown", (event) => {
+    let nextKey = null;
+
+    switch (event.key) {
+      case "ArrowRight":
+        nextKey = getRightKey(root.activeElement);
+        break;
+      case "ArrowLeft":
+        nextKey = getLeftKey(root.activeElement);
+        break;
+      case "ArrowDown":
+        nextKey = getBottomKey(root.activeElement);
+        break;
+      case "ArrowUp":
+        nextKey = getTopKey(root.activeElement);
+        break;
+      default:
+        return;
+    }
+
+    if (nextKey) {
+      event.preventDefault();
+      nextKey.focus();
+    }
+  });
+};
+
 class VirtualKeyboard extends HTMLElement {
   constructor() {
     super();
@@ -126,6 +202,7 @@ class VirtualKeyboard extends HTMLElement {
   connectedCallback() {
     this.root.appendChild(createVirtualKeyboard(this.layout));
     addFocusTrap(this.root);
+    addArrowKeysNavigation(this.root);
   }
 }
 
