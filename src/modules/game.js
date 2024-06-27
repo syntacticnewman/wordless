@@ -9,10 +9,16 @@ const REQUIRED_GUESS_LENGTH = 5;
 const MAX_NUMBER_OF_GUESSES = 6;
 
 let $secretWord = "";
-
 let numberOfGuesses = 0;
 let gameOver = false;
 let win = false;
+
+const __reset__ = () => {
+  $secretWord = "";
+  numberOfGuesses = 0;
+  gameOver = false;
+  win = false;
+};
 
 const getState = () => ({
   numberOfGuesses,
@@ -108,6 +114,7 @@ const init = async () => {
 };
 
 export default {
+  __reset__,
   getCurrentGuessNumber,
   getState,
   hasPlayerWon,
