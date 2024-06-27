@@ -101,67 +101,51 @@ const addFocusTrap = (root) => {
 };
 
 const addArrowKeysNavigation = (root) => {
-  const allKeys = root.querySelectorAll(".virtual-key");
-
-  const getNextKey = (current) => {
-    for (let i = 0; i < allKeys.length; i++) {
-      if (current === allKeys.item(i)) {
-        return allKeys.item((i + 1) % allKeys.length);
-      }
-    }
-
-    return null;
+  const findKeyIndex = (row, current) => {
+    return Array.from(row.children).findIndex((key) => current === key);
   };
 
-  const getPrevKey = (current) => {
-    for (let i = 0; i < allKeys.length; i++) {
-      if (current === allKeys.item(i)) {
-        return allKeys.item((i - 1 + allKeys.length) % allKeys.length);
-      }
-    }
+  const getRightKey = (current) => {
+    const row = current.parentNode;
+    const i = findKeyIndex(row, current);
 
-    return null;
+    return row.children[(i + 1) % row.children.length];
   };
 
-  const getNextRowKey = (current) => {
-    const parentRow = current.closest(".key-row");
+  const getLeftKey = (current) => {
+    const row = current.parentNode;
+    const i = findKeyIndex(row, current);
 
-    if (!parentRow || !parentRow.nextSibling) return null;
+    return row.children[(i - 1 + row.children.length) % row.children.length];
+  };
 
-    const currentIndex = Array.from(parentRow.children).findIndex(
-      (key) => current === key
-    );
+  const getBottomKey = (current) => {
+    const row = current.parentNode;
 
-    // safe guard
-    if (-1 === currentIndex) return null;
+    if (!row.nextSibling) return null;
 
-    const nextRow = parentRow.nextSibling;
+    const i = findKeyIndex(row, current);
+    const nextRow = row.nextSibling;
 
-    if (currentIndex >= nextRow.children.length) {
+    if (i >= nextRow.children.length) {
       return nextRow.children[nextRow.children.length - 1];
     } else {
-      return nextRow.children[currentIndex];
+      return nextRow.children[i];
     }
   };
 
-  const getPrevRowKey = (current) => {
-    const parentRow = current.closest(".key-row");
+  const getTopKey = (current) => {
+    const row = current.parentNode;
 
-    if (!parentRow || !parentRow.previousSibling) return null;
+    if (!row.previousSibling) return null;
 
-    const currentIndex = Array.from(parentRow.children).findIndex(
-      (key) => current === key
-    );
+    const i = findKeyIndex(row, current);
+    const prevRow = row.previousSibling;
 
-    // safe guard
-    if (-1 === currentIndex) return null;
-
-    const prevRow = parentRow.previousSibling;
-
-    if (currentIndex >= prevRow.children.length) {
+    if (i >= prevRow.children.length) {
       return prevRow.children[prevRow.children.length - 1];
     } else {
-      return prevRow.children[currentIndex];
+      return prevRow.children[i];
     }
   };
 
@@ -170,16 +154,16 @@ const addArrowKeysNavigation = (root) => {
 
     switch (event.key) {
       case "ArrowRight":
-        nextKey = getNextKey(root.activeElement);
+        nextKey = getRightKey(root.activeElement);
         break;
       case "ArrowLeft":
-        nextKey = getPrevKey(root.activeElement);
+        nextKey = getLeftKey(root.activeElement);
         break;
       case "ArrowDown":
-        nextKey = getNextRowKey(root.activeElement);
+        nextKey = getBottomKey(root.activeElement);
         break;
       case "ArrowUp":
-        nextKey = getPrevRowKey(root.activeElement);
+        nextKey = getTopKey(root.activeElement);
         break;
       default:
         return;
