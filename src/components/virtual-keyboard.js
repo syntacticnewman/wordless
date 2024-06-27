@@ -100,6 +100,59 @@ const addFocusTrap = (root) => {
   });
 };
 
+const addArrowKeysNavigation = (root) => {
+  const allKeys = root.querySelectorAll(".virtual-key");
+
+  const getNext = (current) => {
+    for (let i = 0; i < allKeys.length; i++) {
+      if (current === allKeys.item(i)) {
+        return allKeys.item((i + 1) % allKeys.length);
+      }
+    }
+
+    return null;
+  };
+
+  const getPrev = (current) => {
+    for (let i = 0; i < allKeys.length; i++) {
+      if (current === allKeys.item(i)) {
+        return allKeys.item((i - 1 + allKeys.length) % allKeys.length);
+      }
+    }
+
+    return null;
+  };
+
+  const goToNext = (event) => {
+    const next = getNext(root.activeElement);
+
+    if (next) {
+      event.preventDefault();
+      next.focus();
+    }
+  };
+
+  const goToPrev = (event) => {
+    const prev = getPrev(root.activeElement);
+
+    if (prev) {
+      event.preventDefault();
+      prev.focus();
+    }
+  };
+
+  root.addEventListener("keydown", (event) => {
+    switch (event.key) {
+      case "ArrowRight":
+        return goToNext(event);
+      case "ArrowLeft":
+        return goToPrev(event);
+      default:
+        return;
+    }
+  });
+};
+
 class VirtualKeyboard extends HTMLElement {
   constructor() {
     super();
@@ -126,6 +179,7 @@ class VirtualKeyboard extends HTMLElement {
   connectedCallback() {
     this.root.appendChild(createVirtualKeyboard(this.layout));
     addFocusTrap(this.root);
+    addArrowKeysNavigation(this.root);
   }
 }
 
