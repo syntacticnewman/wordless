@@ -103,7 +103,7 @@ const addFocusTrap = (root) => {
 const addArrowKeysNavigation = (root) => {
   const allKeys = root.querySelectorAll(".virtual-key");
 
-  const getNext = (current) => {
+  const getNextKey = (current) => {
     for (let i = 0; i < allKeys.length; i++) {
       if (current === allKeys.item(i)) {
         return allKeys.item((i + 1) % allKeys.length);
@@ -113,7 +113,7 @@ const addArrowKeysNavigation = (root) => {
     return null;
   };
 
-  const getPrev = (current) => {
+  const getPrevKey = (current) => {
     for (let i = 0; i < allKeys.length; i++) {
       if (current === allKeys.item(i)) {
         return allKeys.item((i - 1 + allKeys.length) % allKeys.length);
@@ -123,32 +123,71 @@ const addArrowKeysNavigation = (root) => {
     return null;
   };
 
-  const goToNext = (event) => {
-    const next = getNext(root.activeElement);
+  const getNextRowKey = (current) => {
+    const parentRow = current.closest(".key-row");
 
-    if (next) {
-      event.preventDefault();
-      next.focus();
+    if (!parentRow || !parentRow.nextSibling) return null;
+
+    const currentIndex = Array.from(parentRow.children).findIndex(
+      (key) => current === key
+    );
+
+    // safe guard
+    if (-1 === currentIndex) return null;
+
+    const nextRow = parentRow.nextSibling;
+
+    if (currentIndex >= nextRow.children.length) {
+      return nextRow.children[nextRow.children.length - 1];
+    } else {
+      return nextRow.children[currentIndex];
     }
   };
 
-  const goToPrev = (event) => {
-    const prev = getPrev(root.activeElement);
+  const getPrevRowKey = (current) => {
+    const parentRow = current.closest(".key-row");
 
-    if (prev) {
-      event.preventDefault();
-      prev.focus();
+    if (!parentRow || !parentRow.previousSibling) return null;
+
+    const currentIndex = Array.from(parentRow.children).findIndex(
+      (key) => current === key
+    );
+
+    // safe guard
+    if (-1 === currentIndex) return null;
+
+    const prevRow = parentRow.previousSibling;
+
+    if (currentIndex >= prevRow.children.length) {
+      return prevRow.children[prevRow.children.length - 1];
+    } else {
+      return prevRow.children[currentIndex];
     }
   };
 
   root.addEventListener("keydown", (event) => {
+    let nextKey = null;
+
     switch (event.key) {
       case "ArrowRight":
-        return goToNext(event);
+        nextKey = getNextKey(root.activeElement);
+        break;
       case "ArrowLeft":
-        return goToPrev(event);
+        nextKey = getPrevKey(root.activeElement);
+        break;
+      case "ArrowDown":
+        nextKey = getNextRowKey(root.activeElement);
+        break;
+      case "ArrowUp":
+        nextKey = getPrevRowKey(root.activeElement);
+        break;
       default:
         return;
+    }
+
+    if (nextKey) {
+      event.preventDefault();
+      nextKey.focus();
     }
   });
 };
