@@ -39,13 +39,26 @@
   user-select: none;
 }
 
-.enter-key {
+@media screen and (min-width: 375px) {
+  .virtual-key {
+    min-height: 3rem;
+    min-width: 2rem;
+  }
+}
+
+.virtual-key.enter-key {
   font-size: 85%;
   font-weight: normal;
   min-width: 3rem;
 }
 
-.backspace-key {
+@media screen and (min-width: 375px) {
+  .virtual-key.enter-key {
+    font-size: 90%;
+  }
+}
+
+.virtual-key.backspace-key {
   min-width: 3rem;
 }
 
@@ -64,24 +77,4 @@
 .virtual-key.incorrect {
   color: var(--white);
   background-color: var(--dark-gray);
-}
-
-/* Responsive min-width: 375px */
-
-@media (min-width: 375px) {
-  /* Responsive keyboard keys */
-
-  .virtual-key {
-    min-height: 3rem;
-    min-width: 2rem;
-  }
-
-  .enter-key {
-    font-size: 90%;
-    min-width: 3rem;
-  }
-
-  .backspace-key {
-    min-width: 3rem;
-  }
 }

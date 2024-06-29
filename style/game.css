@@ -3,7 +3,7 @@
 
 /* Header section */
 
-header {
+.header {
   background-color: var(--white);
   border-bottom: 1px solid var(--light-gray);
   height: var(--header-height);
@@ -11,21 +11,21 @@ header {
 
 /* Title */
 
-header h1 {
+.wordless-title {
   display: flex;
   font-family: var(--serif);
   justify-content: center;
 }
 
-header h1 span.yellow {
+.wordless-title span.yellow {
   color: var(--yellow);
 }
 
-header h1 span.green {
+.wordless-title span.green {
   color: var(--green);
 }
 
-header h1 span.gray {
+.wordless-title span.gray {
   color: var(--dark-gray);
 }
 
@@ -76,7 +76,7 @@ header h1 span.gray {
   justify-content: center;
 }
 
-/* Styles for board */
+/* Styles for the board game */
 
 .board {
   flex-basis: 100%;
@@ -85,7 +85,13 @@ header h1 span.gray {
   padding: 1rem 0;
 }
 
-/* Styles for guesses */
+@media screen and (min-width: 375px) {
+  .board {
+    max-height: 500px;
+  }
+}
+
+/* Styles for the row guesses */
 
 .guess--invalid {
   animation: shake var(--shake-speed) cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -106,7 +112,7 @@ header h1 span.gray {
   animation-timing-function: ease-in-out;
 }
 
-/* Styles for letters */
+/* Styles for the letters */
 
 .letter {
   animation: typing var(--typing-speed) ease-out;
@@ -124,8 +130,6 @@ header h1 span.gray {
   transition-property: color, background-color;
   transition-timing-function: ease-out;
 }
-
-/* Feedback states */
 
 .letter--correct {
   color: var(--white);
@@ -152,17 +156,7 @@ virtual-keyboard {
   min-height: 146px;
 }
 
-/* Responsive min-width: 375px */
-
-@media (min-width: 375px) {
-  /* Responsive board */
-
-  .board {
-    max-height: 500px;
-  }
-
-  /* Responsive Virtual Keyboard */
-
+@media screen and (min-width: 375px) {
   virtual-keyboard {
     min-height: 170px;
   }
