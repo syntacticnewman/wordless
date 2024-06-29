@@ -1,15 +1,18 @@
 @import "./base.css";
 @import "./keyframes.css";
 
-/* Header section */
+/* Header Section */
 
 .header {
+  align-items: center;
   background-color: var(--white);
   border-bottom: 1px solid var(--light-gray);
+  display: flex;
   height: var(--header-height);
+  justify-content: center;
 }
 
-/* Title */
+/* Game Title */
 
 .wordless-title {
   display: flex;
@@ -29,7 +32,13 @@
   color: var(--dark-gray);
 }
 
-/* Styles for spinner */
+/* Navbar */
+.nav {
+  position: absolute;
+  right: 1rem;
+}
+
+/* Spinner */
 
 .spinner {
   display: inline-block;
@@ -43,7 +52,7 @@
   animation-timing-function: ease-out;
 }
 
-/* Styles for main */
+/* Main */
 
 .main {
   display: flex;
@@ -51,7 +60,7 @@
   height: calc(100% - var(--header-height));
 }
 
-/* Styles for the grid layout */
+/* Table Layout */
 
 .table {
   display: grid;
@@ -60,11 +69,15 @@
   justify-items: center;
 }
 
+/* Row Layout */
+
 .row {
   display: grid;
   gap: 5px;
   grid-template-columns: repeat(5, 1fr);
 }
+
+/* Box Layout */
 
 .box {
   align-items: center;
@@ -76,7 +89,7 @@
   justify-content: center;
 }
 
-/* Styles for the board game */
+/* Game Board */
 
 .board {
   flex-basis: 100%;
@@ -91,7 +104,7 @@
   }
 }
 
-/* Styles for the row guesses */
+/* Guess Row */
 
 .guess--invalid {
   animation: shake var(--shake-speed) cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -112,7 +125,7 @@
   animation-timing-function: ease-in-out;
 }
 
-/* Styles for the letters */
+/* Letter */
 
 .letter {
   animation: typing var(--typing-speed) ease-out;
@@ -160,4 +173,62 @@ virtual-keyboard {
   virtual-keyboard {
     min-height: 170px;
   }
+}
+
+/* About Button */
+
+#about-btn {
+  --btn-color: var(--dark-gray);
+  background-color: transparent;
+  border-radius: 15px;
+  border: 2px solid var(--btn-color);
+  color: var(--btn-color);
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  width: 1.5rem;
+}
+
+/* About Dialog */
+
+.dialog {
+  border: 1.5px solid var(--black);
+  margin: 0;
+  min-height: 100vh;
+  min-width: 100vw;
+  padding: 2rem;
+}
+
+.dialog-header {
+  align-items: center;
+  display: flex;
+  margin-bottom: 3rem;
+}
+
+.dialog-close-btn {
+  --btn-color: var(--black);
+  --btn-size: 32px;
+  align-items: center;
+  background-color: transparent;
+  border: 1.5px solid var(--btn-color);
+  color: var(--btn-color);
+  display: flex;
+  font-size: 1rem;
+  font-weight: bold;
+  height: var(--btn-size);
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  width: var(--btn-size);
+}
+
+.dialog .box {
+  --box-size: 42px;
+  display: inline-flex;
+  margin-right: 0.5rem;
+  width: var(--box-size);
 }
