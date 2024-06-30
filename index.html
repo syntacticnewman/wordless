@@ -20,8 +20,8 @@
     <title>Wordless</title>
   </head>
   <body>
-    <header>
-      <h1>
+    <header class="header">
+      <h1 class="wordless-title">
         <span>W</span>
         <span class="spinner">o</span>
         <span>r</span>
@@ -31,6 +31,11 @@
         <span class="gray">s</span>
         <span class="gray">s</span>
       </h1>
+      <nav class="nav">
+        <button id="about-btn" aria-label="About" title="About">
+          <span aria-hidden="true">?</span>
+        </button>
+      </nav>
     </header>
     <main class="main">
       <div class="board table">
@@ -79,5 +84,27 @@
       </div>
       <virtual-keyboard></virtual-keyboard>
     </main>
+    <dialog class="dialog">
+      <header class="dialog-header">
+        <h2>About Wordless</h2>
+        <button class="dialog-close-btn" aria-label="Close" title="Close">
+          <span aria-hidden="true">x</span>
+        </button>
+      </header>
+      <h3>How to play</h3>
+      <p>Guess the secret five-letter English word in six tries.</p>
+      <p>
+        <span class="box letter--correct" aria-hidden="true">A</span>Green means
+        the letter is correct and in the right position.
+      </p>
+      <p>
+        <span class="box letter--wrong" aria-hidden="true">A</span>Yellow means
+        the letter is in the word but in the wrong position.
+      </p>
+      <p>
+        <span class="box letter--incorrect" aria-hidden="true">A</span>Gray
+        means the letter is not in the word.
+      </p>
+    </dialog>
   </body>
 </html>

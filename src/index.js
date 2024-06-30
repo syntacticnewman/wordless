@@ -14,4 +14,23 @@ window.wordless = {
   },
 };
 
-document.addEventListener("DOMContentLoaded", () => wordless.start());
+window.modal = {
+  init() {
+    const aboutButton = document.querySelector("#about-btn");
+    const modal = document.querySelector("dialog");
+    const closeButton = document.querySelector(".dialog-close-btn");
+
+    aboutButton.addEventListener("click", () => {
+      modal.showModal();
+    });
+
+    closeButton.addEventListener("click", () => {
+      modal.close();
+    });
+  },
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  wordless.start();
+  modal.init();
+});

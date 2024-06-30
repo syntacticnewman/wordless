@@ -1,35 +1,44 @@
 @import "./base.css";
 @import "./keyframes.css";
 
-/* Header section */
+/* Header Section */
 
-header {
+.header {
+  align-items: center;
   background-color: var(--white);
   border-bottom: 1px solid var(--light-gray);
+  display: flex;
   height: var(--header-height);
+  justify-content: center;
 }
 
-/* Title */
+/* Game Title */
 
-header h1 {
+.wordless-title {
   display: flex;
   font-family: var(--serif);
   justify-content: center;
 }
 
-header h1 span.yellow {
+.wordless-title span.yellow {
   color: var(--yellow);
 }
 
-header h1 span.green {
+.wordless-title span.green {
   color: var(--green);
 }
 
-header h1 span.gray {
+.wordless-title span.gray {
   color: var(--dark-gray);
 }
 
-/* Styles for spinner */
+/* Navbar */
+.nav {
+  position: absolute;
+  right: 1rem;
+}
+
+/* Spinner */
 
 .spinner {
   display: inline-block;
@@ -43,7 +52,7 @@ header h1 span.gray {
   animation-timing-function: ease-out;
 }
 
-/* Styles for main */
+/* Main */
 
 .main {
   display: flex;
@@ -51,7 +60,7 @@ header h1 span.gray {
   height: calc(100% - var(--header-height));
 }
 
-/* Styles for the grid layout */
+/* Table Layout */
 
 .table {
   display: grid;
@@ -60,11 +69,15 @@ header h1 span.gray {
   justify-items: center;
 }
 
+/* Row Layout */
+
 .row {
   display: grid;
   gap: 5px;
   grid-template-columns: repeat(5, 1fr);
 }
+
+/* Box Layout */
 
 .box {
   align-items: center;
@@ -76,7 +89,7 @@ header h1 span.gray {
   justify-content: center;
 }
 
-/* Styles for board */
+/* Game Board */
 
 .board {
   flex-basis: 100%;
@@ -85,7 +98,13 @@ header h1 span.gray {
   padding: 1rem 0;
 }
 
-/* Styles for guesses */
+@media screen and (min-width: 375px) {
+  .board {
+    max-height: 500px;
+  }
+}
+
+/* Guess Row */
 
 .guess--invalid {
   animation: shake var(--shake-speed) cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -106,7 +125,7 @@ header h1 span.gray {
   animation-timing-function: ease-in-out;
 }
 
-/* Styles for letters */
+/* Letter */
 
 .letter {
   animation: typing var(--typing-speed) ease-out;
@@ -124,8 +143,6 @@ header h1 span.gray {
   transition-property: color, background-color;
   transition-timing-function: ease-out;
 }
-
-/* Feedback states */
 
 .letter--correct {
   color: var(--white);
@@ -152,18 +169,91 @@ virtual-keyboard {
   min-height: 146px;
 }
 
-/* Responsive min-width: 375px */
-
-@media (min-width: 375px) {
-  /* Responsive board */
-
-  .board {
-    max-height: 500px;
-  }
-
-  /* Responsive Virtual Keyboard */
-
+@media screen and (min-width: 375px) {
   virtual-keyboard {
     min-height: 170px;
   }
+}
+
+/* About Button */
+
+#about-btn {
+  --btn-color: var(--dark-gray);
+  background-color: transparent;
+  border-radius: 15px;
+  border: 2px solid var(--btn-color);
+  color: var(--btn-color);
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  width: 1.5rem;
+}
+
+/* About Dialog */
+
+.dialog {
+  border: 1.5px solid var(--black);
+  margin: 0;
+  min-height: 100vh;
+  min-width: 100vw;
+  padding: 2rem;
+}
+
+@media screen and (min-width: 425px) {
+  .dialog {
+    box-shadow: 0 19px 38px rgb(0 0 0 / 12%), 0 15px 12px rgb(0 0 0 / 22%);
+    margin: 0 auto;
+    min-height: auto;
+    min-width: calc(425px - (1rem * 2));
+    top: 50vh;
+    transform: translateY(-50%);
+  }
+
+  .dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.dialog-header {
+  align-items: center;
+  display: flex;
+  margin-bottom: 3rem;
+}
+
+@media screen and (min-width: 425px) {
+  .dialog-header {
+    margin-bottom: 2rem;
+  }
+
+  .dialog-header + h3 {
+    margin-bottom: 2rem;
+  }
+}
+
+.dialog-close-btn {
+  --btn-color: var(--black);
+  --btn-size: 32px;
+  align-items: center;
+  background-color: transparent;
+  border: 1.5px solid var(--btn-color);
+  color: var(--btn-color);
+  display: flex;
+  font-size: 1rem;
+  font-weight: bold;
+  height: var(--btn-size);
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  width: var(--btn-size);
+}
+
+.dialog .box {
+  --box-size: 42px;
+  display: inline-flex;
+  margin-right: 0.5rem;
+  width: var(--box-size);
 }
