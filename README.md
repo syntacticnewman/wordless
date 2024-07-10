@@ -12,6 +12,10 @@ Wordless is a game where you have six chances to guess a five-letter word in Eng
 - CSS
 - Vanilla JavaScript
 
+## API
+
+This game uses a public API provided by Frontend Masters to get the word of the day and validate user guesses. The API is featured in the course [Complete Intro to Web Development, v3](https://frontendmasters.com/courses/web-development-v3/) taught by Brian Holt, which I highly recommend.
+
 ## Demo
 
 Play the game here: [Wordless Game](https://wordless-game.netlify.app)
