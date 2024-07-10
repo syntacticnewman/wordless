@@ -122,7 +122,22 @@ const renderVirtualKeysFeedback = (keyHistory) => {
   }, 500);
 };
 
+const initModals = () => {
+  const aboutDialog = document.querySelector(".about-dialog");
+  const aboutShowButton = document.querySelector(".about-dialog-show-btn");
+  const aboutCloseButton = document.querySelector(".about-dialog-close-btn");
+
+  aboutShowButton.addEventListener("click", () => {
+    aboutDialog.showModal();
+  });
+
+  aboutCloseButton.addEventListener("click", () => {
+    aboutDialog.close();
+  });
+};
+
 export default {
+  initModals,
   renderGameOverFeedback,
   renderInvalidGuessFeedback,
   renderLetters,
