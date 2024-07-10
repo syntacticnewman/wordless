@@ -8,6 +8,9 @@ import UI from "./ui.js";
  */
 const updateKeyHistory = (feedback) => {
   const keyHistory = wordless.store.getState().keyHistory;
+  // This order helps to avoid collisions with feedback,
+  // for example, a letter can be correct and wrong at the same time
+  // when a word has that letter more than once.
   const order = {
     correct: 2,
     wrong: 1,

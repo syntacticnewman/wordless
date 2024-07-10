@@ -1,3 +1,4 @@
+// TODO: This should be an env var
 const API_URL = "https://words.dev-apis.com";
 
 const apiEndpoint = (path) => `${API_URL}/${path}`;
