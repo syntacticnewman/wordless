@@ -194,10 +194,15 @@ virtual-keyboard {
 
 .about-dialog {
   border: 1.5px solid var(--black);
+  flex-direction: column;
   margin: 0;
   min-height: 100vh;
   min-width: 100vw;
   padding: 2rem;
+}
+
+.about-dialog[open] {
+  display: flex;
 }
 
 @media screen and (min-width: 425px) {
@@ -274,4 +279,22 @@ virtual-keyboard {
   --box-size: 42px;
   width: var(--box-size);
   height: auto;
+}
+
+/* Game Credit */
+
+.game-credit {
+  margin-top: auto;
+}
+
+.game-credit > p {
+  font-size: 80%;
+  margin: 0;
+  text-align: center;
+}
+
+@media screen and (min-width: 425px) {
+  .game-credit {
+    margin-top: 2rem;
+  }
 }
