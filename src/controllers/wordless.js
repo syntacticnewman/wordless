@@ -57,6 +57,8 @@ const handleSubmitSuccess = (guess, feedback) => {
 
     // wait for animations to complete
     setTimeout(() => {
+      GA.trackGameOver(Game.hasPlayerWon(), Game.getCurrentGuessNumber());
+
       if (Game.hasPlayerWon()) {
         alert("Congratulations! You win! 🥳");
       } else {
