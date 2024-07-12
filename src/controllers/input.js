@@ -73,16 +73,14 @@ const processBackspaceKey = () => {
  * it will dispatch a input submit event
  * except if the Enter key was pressed while focusing a virtual key.
  */
-const processEnterKey = (virtualEnter) => {
-  // If the physical Enter key is pressed over a focused virtual key,
-  // do nothing, as the virtual key will be processed on its own.
-  // This prevents accidental premature submission of a guess
-  // while entering letters on the virtual keyboard.
-  if (!virtualEnter && isVirtualKeyBoard(document.activeElement)) {
-    return;
+const processEnterKey = (virtualEnterKey) => {
+  if (
+    virtualEnterKey || // always process Enter virtual key
+    null === document.activeElement || // if there's no focused element
+    "BODY" === document.activeElement.tagName // or document body is focused (by default)
+  ) {
+    notifyInputSubmit();
   }
-
-  notifyInputSubmit();
 };
 
 /**
