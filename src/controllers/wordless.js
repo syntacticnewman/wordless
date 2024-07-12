@@ -1,3 +1,4 @@
+import GA from "../modules/analytics.js";
 import Game from "../modules/game.js";
 import Input, { INPUT_CHANGE_EVENT, INPUT_SUBMIT_EVENT } from "./input.js";
 import UI from "./ui.js";
@@ -38,12 +39,14 @@ const updateKeyHistory = (feedback) => {
  * then render the feedback for each letter both in the board and the virtual keyboard,
  * finally if game is over, alert if player won or lost.
  */
-const handleSubmitSuccess = (feedback) => {
+const handleSubmitSuccess = (guess, feedback) => {
   Input.clear();
 
   const previousGuess = Game.getCurrentGuessNumber() - 1;
 
   UI.renderLettersFeedback(previousGuess, feedback);
+
+  GA.trackGuessSubmission(guess, previousGuess + 1);
 
   const keyHistory = updateKeyHistory(feedback);
 
@@ -106,7 +109,7 @@ const handleOnInputSubmit = async (value) => {
 
   try {
     const feedback = await Game.submitGuess(value);
-    handleSubmitSuccess(feedback);
+    handleSubmitSuccess(value, feedback);
   } catch (error) {
     handleSubmitError(error);
   } finally {
