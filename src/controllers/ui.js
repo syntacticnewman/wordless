@@ -1,3 +1,5 @@
+import GA from "../modules/analytics.js";
+
 /**
  * Selects all the guess rows.
  */
@@ -129,10 +131,15 @@ const initModals = () => {
 
   aboutShowButton.addEventListener("click", () => {
     aboutDialog.showModal();
+    GA.trackAboutDialog(true);
   });
 
   aboutCloseButton.addEventListener("click", () => {
     aboutDialog.close();
+  });
+
+  aboutDialog.addEventListener("close", () => {
+    GA.trackAboutDialog(false);
   });
 };
 

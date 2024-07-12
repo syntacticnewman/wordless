@@ -1,23 +1,26 @@
 const CATEGORY = {
-  GAME_PLAY: "gameplay",
+  GAME_PLAY: "game_play",
+  ABOUT_GAME: "about_game",
 };
 
-const track = (eventName, params = {}) => {
-  gtag("event", eventName, params);
+const isUndefined = (val) => "undefined" === typeof val;
+
+const track = (eventName, eventParams = {}) => {
+  gtag("event", eventName, eventParams);
 };
 
 const getEventParams = ({ category, label, value } = {}) => {
   const params = {};
 
-  if (category) {
+  if (!isUndefined(category)) {
     params.event_category = category;
   }
 
-  if (label) {
+  if (!isUndefined(label)) {
     params.event_label = label;
   }
 
-  if (value) {
+  if (!isUndefined(value)) {
     params.value = value;
   }
 
@@ -45,4 +48,15 @@ const trackGameOver = (isAWin, numberOfTries) => {
   );
 };
 
-export default { trackGuessSubmission, trackGameOver };
+const trackAboutDialog = (isOpen) => {
+  track(
+    "about_dialog",
+    getEventParams({
+      category: CATEGORY.ABOUT_GAME,
+      label: "open",
+      value: Number(isOpen),
+    })
+  );
+};
+
+export default { trackGuessSubmission, trackGameOver, trackAboutDialog };
