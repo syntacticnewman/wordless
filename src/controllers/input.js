@@ -32,15 +32,15 @@ const clear = () => {
 
 /**
  * When a letter key is pressed,
- * it will add the letter to the input buffer
+ * add the letter to the input buffer
  * and dispatch an input change event.
  */
 const processLetterKey = (key, virtualKey) => {
-  // When the key pressed is a physical key
-  // and previous focused key is virtual,
-  // remove the focus of that key element.
-  if (!virtualKey && UI.isVirtualKeyBoard(document.activeElement)) {
-    UI.removeFocus(document.activeElement);
+  // When the letter key pressed is a physical key
+  // and the virtual keyboard was focused,
+  // remove the focus.
+  if (!virtualKey && UI.isVirtualKeyBoardFocused()) {
+    UI.resetFocus();
   }
 
   Buffer.push(key);
@@ -50,7 +50,7 @@ const processLetterKey = (key, virtualKey) => {
 
 /**
  * When the Backspace key is pressed,
- * it will remove the last character entered in the input buffer
+ * remove the last character entered in the input buffer
  * and dispatch an input change event.
  */
 const processBackspaceKey = () => {
@@ -60,16 +60,16 @@ const processBackspaceKey = () => {
 };
 
 /**
- * When the Enter key is pressed,
- * it will dispatch a input submit event
- * except if the Enter key was pressed while focusing a virtual key.
+ * When the Enter key is pressed, dispatch an input submit event.
  */
 const processEnterKey = (virtualEnterKey) => {
-  if (
-    virtualEnterKey || // always process Enter virtual key
-    null === document.activeElement || // if there's no focused element
-    "BODY" === document.activeElement.tagName // or document body is focused (by default)
-  ) {
+  // always process the virtual Enter key
+  if (virtualEnterKey) {
+    notifyInputSubmit();
+  }
+
+  // process physical Enter key if there is no focused element
+  if (UI.noActiveElement()) {
     notifyInputSubmit();
   }
 };

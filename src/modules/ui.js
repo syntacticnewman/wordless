@@ -164,14 +164,35 @@ const stopLoading = () => {
 const isVirtualKeyBoard = (element) => "VIRTUAL-KEYBOARD" === element.tagName;
 
 /**
- * Add focus to the given element.
+ * Returns if the virtual keyboard is focused
  */
-const focusElement = (element) => element.focus();
+const isVirtualKeyBoardFocused = () =>
+  isVirtualKeyBoard(document.activeElement);
 
 /**
  * Removes focus from given element.
  */
 const removeFocus = (element) => element.blur();
+
+/**
+ * Removes the focus form the active focused element.
+ */
+const resetFocus = () => removeFocus(document.activeElement);
+
+/**
+ * Returns if the active focused element is null
+ */
+const isActiveElementNull = () => null === document.activeElement;
+
+/**
+ * Returns if the active focused element is the document body.
+ */
+const isActiveElementBody = () => "BODY" === document.activeElement.tagName;
+
+/**
+ * Returns if there is no active focused element.
+ */
+const noActiveElement = () => isActiveElementNull() || isActiveElementBody();
 
 //#endregion Utils
 
@@ -187,15 +208,15 @@ const init = (GA) => {
 //#endregion Init
 
 export default {
-  focusElement,
   init,
-  isVirtualKeyBoard,
-  removeFocus,
+  isVirtualKeyBoardFocused,
+  noActiveElement,
   renderGameOverFeedback,
   renderInvalidGuessFeedback,
   renderLetters,
   renderLettersFeedback,
   renderVirtualKeysFeedback,
+  resetFocus,
   startLoading,
   stopLoading,
 };
