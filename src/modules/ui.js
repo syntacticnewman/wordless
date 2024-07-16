@@ -1,17 +1,24 @@
-import GA from "../modules/analytics.js";
+import VirtualKeyboard from "../components/virtual-keyboard.js";
+
+//#region ===== Queries =====
 
 /**
- * Selects all the guess rows.
+ * Selects the loading spinner.
+ */
+const querySpinner = () => document.querySelector(".spinner");
+
+/**
+ * Selects all rows (guesses).
  */
 const queryAllRows = () => document.querySelectorAll(".guess.row");
 
 /**
- * Selects a single guess or by index.
+ * Selects a single row by index.
  */
 const queryRow = (index) => queryAllRows().item(index);
 
 /**
- * Selects all boxes (letters) within a guess row.
+ * Selects all boxes (letters) within a row (guess).
  */
 const queryBoxes = (row) => row.querySelectorAll(".box");
 
@@ -23,8 +30,12 @@ const queryVirtualKeys = () =>
     .querySelector("virtual-keyboard")
     .shadowRoot.querySelectorAll(".virtual-key");
 
+//#endregion
+
+//#region ===== Render =====
+
 /**
- * Renders the letter as user is typing on the current guess row given by the index.
+ * Renders the letter as the user types on the current row (guess) index.
  */
 const renderLetters = (index, letters) => {
   const row = queryRow(index);
@@ -44,8 +55,7 @@ const renderLetters = (index, letters) => {
 };
 
 /**
- * Renders the feedback for each letter,
- * whether is correct (green), incorrect (gray) or wrong (yellow) by flipping the card.
+ * Renders the feedback color for each letter with a flip animation.
  */
 const renderLettersFeedback = (index, feedback) => {
   const row = queryRow(index);
@@ -67,7 +77,9 @@ const renderInvalidGuessFeedback = (index) => {
 };
 
 /**
- * Renders feedback when user wins by adding a nice choreography animation to the guess.
+ * Renders feedback when game is over.
+ * If the player wins adds a nice choreography animation.
+ * If the player loses, does nothing.
  */
 const renderGameOverFeedback = (index, win) => {
   if (!win) return; // TODO: feedback for losing?
@@ -82,29 +94,6 @@ const renderGameOverFeedback = (index, win) => {
   setTimeout(() => {
     row.classList.add("guess--correct");
   }, 500);
-};
-
-/**
- * Selects the loader spinner.
- */
-const querySpinner = () => document.querySelector(".spinner");
-
-/**
- * Animates the loader spinner.
- */
-const startLoading = () => {
-  const spinner = querySpinner();
-
-  spinner.classList.add("spinner--loading");
-};
-
-/**
- * Stops animation on the loader spinner.
- */
-const stopLoading = () => {
-  const spinner = querySpinner();
-
-  spinner.classList.remove("spinner--loading");
 };
 
 /**
@@ -124,7 +113,33 @@ const renderVirtualKeysFeedback = (keyHistory) => {
   }, 500);
 };
 
-const initModals = () => {
+//#endregion
+
+//#region ===== Loading =====
+
+/**
+ * Animates the loader spinner.
+ */
+const startLoading = () => {
+  const spinner = querySpinner();
+
+  spinner.classList.add("spinner--loading");
+};
+
+/**
+ * Stops animation on the loader spinner.
+ */
+const stopLoading = () => {
+  const spinner = querySpinner();
+
+  spinner.classList.remove("spinner--loading");
+};
+
+//#endregion
+
+//#region ===== Modals =====
+
+const initModals = (GA) => {
   const aboutDialog = document.querySelector(".about-dialog");
   const aboutShowButton = document.querySelector(".about-dialog-show-btn");
   const aboutCloseButton = document.querySelector(".about-dialog-close-btn");
@@ -143,8 +158,21 @@ const initModals = () => {
   });
 };
 
+//#endregion
+
+//#region ===== Init =====
+
+const init = (GA) => {
+  // register virtual keyboard component
+  customElements.define("virtual-keyboard", VirtualKeyboard);
+  // initialize UI modals
+  initModals(GA);
+};
+
+//#endregion
+
 export default {
-  initModals,
+  init,
   renderGameOverFeedback,
   renderInvalidGuessFeedback,
   renderLetters,

@@ -1,7 +1,7 @@
 import GA from "../modules/analytics.js";
 import Game from "../modules/game.js";
+import UI from "../modules/ui.js";
 import Input, { INPUT_CHANGE_EVENT, INPUT_SUBMIT_EVENT } from "./input.js";
-import UI from "./ui.js";
 
 /**
  * Updates the key history to keep track of the letters the user has submitted
