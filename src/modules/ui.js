@@ -30,7 +30,7 @@ const queryVirtualKeys = () =>
     .querySelector("virtual-keyboard")
     .shadowRoot.querySelectorAll(".virtual-key");
 
-//#endregion
+//#endregion Queries
 
 //#region ===== Render =====
 
@@ -113,29 +113,7 @@ const renderVirtualKeysFeedback = (keyHistory) => {
   }, 500);
 };
 
-//#endregion
-
-//#region ===== Loading =====
-
-/**
- * Animates the loader spinner.
- */
-const startLoading = () => {
-  const spinner = querySpinner();
-
-  spinner.classList.add("spinner--loading");
-};
-
-/**
- * Stops animation on the loader spinner.
- */
-const stopLoading = () => {
-  const spinner = querySpinner();
-
-  spinner.classList.remove("spinner--loading");
-};
-
-//#endregion
+//#endregion Render
 
 //#region ===== Modals =====
 
@@ -158,7 +136,44 @@ const initModals = (GA) => {
   });
 };
 
-//#endregion
+//#endregion Modals
+
+//#region ===== Utils =====
+
+/**
+ * Animates the loading spinner.
+ */
+const startLoading = () => {
+  const spinner = querySpinner();
+
+  spinner.classList.add("spinner--loading");
+};
+
+/**
+ * Stops the loading spinner.
+ */
+const stopLoading = () => {
+  const spinner = querySpinner();
+
+  spinner.classList.remove("spinner--loading");
+};
+
+/**
+ * Checks if the given element is the virtual keyboard.
+ */
+const isVirtualKeyBoard = (element) => "VIRTUAL-KEYBOARD" === element.tagName;
+
+/**
+ * Add focus to the given element.
+ */
+const focusElement = (element) => element.focus();
+
+/**
+ * Removes focus from given element.
+ */
+const removeFocus = (element) => element.blur();
+
+//#endregion Utils
 
 //#region ===== Init =====
 
@@ -169,10 +184,13 @@ const init = (GA) => {
   initModals(GA);
 };
 
-//#endregion
+//#endregion Init
 
 export default {
+  focusElement,
   init,
+  isVirtualKeyBoard,
+  removeFocus,
   renderGameOverFeedback,
   renderInvalidGuessFeedback,
   renderLetters,

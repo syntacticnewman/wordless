@@ -1,5 +1,6 @@
 import Buffer from "../services/buffer.js";
-import { isBackSpace, isEnter, isLetter } from "../modules/keyboard.js";
+import * as Keyboard from "../modules/keyboard.js";
+import UI from "../modules/ui.js";
 
 export const INPUT_CHANGE_EVENT = "winputchange";
 export const INPUT_SUBMIT_EVENT = "winputsubmit";
@@ -30,16 +31,6 @@ const clear = () => {
 };
 
 /**
- * Checks if the element given element is the virtual keyboard.
- */
-const isVirtualKeyBoard = (element) => "VIRTUAL-KEYBOARD" === element.tagName;
-
-/**
- * Removes focus from given element.
- */
-const removeFocus = (element) => element.blur();
-
-/**
  * When a letter key is pressed,
  * it will add the letter to the input buffer
  * and dispatch an input change event.
@@ -48,8 +39,8 @@ const processLetterKey = (key, virtualKey) => {
   // When the key pressed is a physical key
   // and previous focused key is virtual,
   // remove the focus of that key element.
-  if (!virtualKey && isVirtualKeyBoard(document.activeElement)) {
-    removeFocus(document.activeElement);
+  if (!virtualKey && UI.isVirtualKeyBoard(document.activeElement)) {
+    UI.removeFocus(document.activeElement);
   }
 
   Buffer.push(key);
@@ -88,11 +79,11 @@ const processEnterKey = (virtualEnterKey) => {
  * the Enter key or the Backspace key.
  */
 const processKey = (key, virtualKey = false) => {
-  if (isLetter(key)) {
+  if (Keyboard.isLetter(key)) {
     processLetterKey(key, virtualKey);
-  } else if (isBackSpace(key)) {
+  } else if (Keyboard.isBackSpace(key)) {
     processBackspaceKey();
-  } else if (isEnter(key)) {
+  } else if (Keyboard.isEnter(key)) {
     processEnterKey(virtualKey);
   }
 };
