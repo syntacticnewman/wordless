@@ -1,7 +1,5 @@
-import Store from "./services/store.js";
-import UI from "./controllers/ui.js";
-import VirtualKeyboard from "./components/virtual-keyboard.js";
 import Wordless from "./controllers/wordless.js";
+import Store from "./services/store.js";
 
 window.wordless = {
   store: Store,
@@ -13,11 +11,4 @@ window.wordless = {
   },
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-  // register virtual keyboard component
-  customElements.define("virtual-keyboard", VirtualKeyboard);
-  // initialize UI modals
-  UI.initModals();
-  // start wordless
-  wordless.start();
-});
+document.addEventListener("DOMContentLoaded", wordless.start);
