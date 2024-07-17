@@ -1,6 +1,4 @@
 import Wordless from "./controllers/wordless.js";
-import GA from "./modules/analytics.js";
-import UI from "./modules/ui.js";
 import Store from "./services/store.js";
 
 window.wordless = {
@@ -13,9 +11,4 @@ window.wordless = {
   },
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-  // load UI components
-  UI.init(GA);
-  // start wordless
-  wordless.start();
-});
+document.addEventListener("DOMContentLoaded", wordless.start);

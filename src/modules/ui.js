@@ -1,4 +1,5 @@
 import VirtualKeyboard from "../components/virtual-keyboard.js";
+import GA from "../services/analytics.js";
 
 //#region ===== Queries =====
 
@@ -136,7 +137,7 @@ const renderVirtualKeysFeedback = (keyHistory) => {
 
 //#region ===== Modals =====
 
-const initModals = (GA) => {
+const initModals = () => {
   const aboutDialog = queryAboutDialog();
   const showAboutDialogButton = queryAboutDialogShowBtn();
   const closeAboutDialogButton = queryAboutDialogCloseBtn();
@@ -227,11 +228,11 @@ const noActiveElement = () => isActiveElementNull() || isActiveElementBody();
 
 //#region ===== Init =====
 
-const init = (GA) => {
+const init = () => {
   // register virtual keyboard component
   customElements.define("virtual-keyboard", VirtualKeyboard);
   // initialize UI modals
-  initModals(GA);
+  initModals();
 };
 
 //#endregion Init
