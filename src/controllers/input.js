@@ -1,6 +1,17 @@
 import Buffer from "../services/buffer.js";
-import * as Keyboard from "../modules/keyboard.js";
+import Keyboard from "../modules/keyboard.js";
 import UI from "../modules/ui.js";
+
+//#region ===== Utils =====
+
+/**
+ * Removes all the contents of the input buffer.
+ */
+const clear = () => {
+  Buffer.flush();
+};
+
+//#endregion Utils
 
 //#region ===== Events =====
 
@@ -27,14 +38,14 @@ const notifyInputSubmit = () => {
 
 //#endregion Events
 
-//#region ===== Processors =====
+//#region ===== Handlers =====
 
 /**
  * When a letter key is pressed,
  * adds the letter to the input buffer,
  * then dispatches the input change event.
  */
-const processLetterKey = (key, virtualKey) => {
+const handleLetterKey = (key, virtualKey) => {
   // If the virtual keyboard was focused, and a physical key is pressed,
   // then resets the focus.
   if (UI.isVirtualKeyBoardFocused() && !virtualKey) {
@@ -53,7 +64,7 @@ const processLetterKey = (key, virtualKey) => {
  * removes the last character entered from the input buffer,
  * then dispatches an input change event.
  */
-const processBackspaceKey = () => {
+const handleBackspaceKey = () => {
   Buffer.pop();
 
   notifyInputChange();
@@ -65,15 +76,11 @@ const processBackspaceKey = () => {
  * When the Enter key is pressed,
  * dispatches an input submit event.
  */
-const processEnterKey = (virtualEnterKey) => {
-  // always process the virtual Enter key
-  if (virtualEnterKey) {
-    notifyInputSubmit();
-    return true;
-  }
-
-  // process physical Enter key if there is no focused element
-  if (UI.noActiveElement()) {
+const handleEnterKey = (virtualEnterKey) => {
+  // only handle the Enter key when:
+  // - is virtual
+  // - or is physical but there's no focused element
+  if (virtualEnterKey || UI.noActiveElement()) {
     notifyInputSubmit();
     return true;
   }
@@ -86,7 +93,7 @@ const processEnterKey = (virtualEnterKey) => {
  * if there's no an actual element focused,
  * then set the focus to the first focusable element in the UI.
  */
-const processTabKey = () => {
+const handleTabKey = () => {
   if (UI.noActiveElement()) {
     UI.focusFirstElement();
     return true;
@@ -99,44 +106,32 @@ const processTabKey = () => {
  * When the Esc key is pressed,
  * remove the focus on the active element.
  */
-const processEscKey = () => {
+const handleEscKey = () => {
   UI.resetFocus();
 
   return true;
 };
 
 /**
- * Processes the key pressed depending on whether is a letter,
- * the Enter key or the Backspace key.
+ * Handles the key pressed.
  */
-const processKey = (key, virtualKey = false) => {
+const handleKey = (key, virtualKey = false) => {
   if (Keyboard.isLetter(key)) {
-    return processLetterKey(key, virtualKey);
+    return handleLetterKey(key, virtualKey);
   } else if (Keyboard.isBackSpace(key)) {
-    return processBackspaceKey();
+    return handleBackspaceKey();
   } else if (Keyboard.isEnter(key)) {
-    return processEnterKey(virtualKey);
+    return handleEnterKey(virtualKey);
   } else if (Keyboard.isTab(key)) {
-    return processTabKey();
+    return handleTabKey();
   } else if (Keyboard.isEsc(key)) {
-    return processEscKey();
+    return handleEscKey();
   }
 
   return false;
 };
 
-//#endregion Processors
-
-//#region ===== Utils =====
-
-/**
- * Removes all the contents of the input buffer.
- */
-const clear = () => {
-  Buffer.flush();
-};
-
-//#endregion Utils
+//#endregion Handlers
 
 //#region ===== Init =====
 
@@ -148,7 +143,7 @@ const clear = () => {
 const init = () => {
   // physical keyboard
   document.addEventListener("keydown", (event) => {
-    const handled = processKey(event.key);
+    const handled = handleKey(event.key);
 
     if (handled) {
       event.preventDefault();
@@ -157,7 +152,7 @@ const init = () => {
 
   // virtual keyboard
   document.addEventListener("virtualkeypressed", (event) => {
-    processKey(event.detail.key, true);
+    handleKey(event.detail.key, true);
   });
 };
 
