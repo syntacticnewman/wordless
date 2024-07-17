@@ -3,27 +3,44 @@ import VirtualKeyboard from "../components/virtual-keyboard.js";
 //#region ===== Queries =====
 
 /**
- * Selects the loading spinner.
+ * Returns the loading spinner.
  */
 const querySpinner = () => document.querySelector(".spinner");
 
 /**
- * Selects all rows (guesses).
+ * Returns the About dialog.
+ */
+const queryAboutDialog = () => document.querySelector(".about-dialog");
+
+/**
+ * Returns the show about dialog button.
+ */
+const queryAboutDialogShowBtn = () =>
+  document.querySelector(".about-dialog-show-btn");
+
+/**
+ * Returns the close about dialog button.
+ */
+const queryAboutDialogCloseBtn = () =>
+  document.querySelector(".about-dialog-close-btn");
+
+/**
+ * Returns all rows (guesses).
  */
 const queryAllRows = () => document.querySelectorAll(".guess.row");
 
 /**
- * Selects a single row by index.
+ * Returns a single row by index.
  */
 const queryRow = (index) => queryAllRows().item(index);
 
 /**
- * Selects all boxes (letters) within a row (guess).
+ * Returns all boxes (letters) within a row (guess).
  */
 const queryBoxes = (row) => row.querySelectorAll(".box");
 
 /**
- * Selects all the virtual key from the virtual keyboard.
+ * Returns all the virtual key from the virtual keyboard.
  */
 const queryVirtualKeys = () =>
   document
@@ -35,12 +52,12 @@ const queryVirtualKeys = () =>
 //#region ===== Render =====
 
 /**
- * Renders the letter as the user types on the current row (guess) index.
+ * Renders the given letters on the row given by the index.
  */
 const renderLetters = (index, letters) => {
   const row = queryRow(index);
 
-  // remove previous error state
+  // removes any previous error state
   row.classList.remove("guess--invalid");
 
   queryBoxes(row).forEach((box, i) => {
@@ -55,7 +72,8 @@ const renderLetters = (index, letters) => {
 };
 
 /**
- * Renders the feedback color for each letter with a flip animation.
+ * Renders the feedback for each letter by adding a class that
+ * will show them in their corresponding color and a class for a flip animation.
  */
 const renderLettersFeedback = (index, feedback) => {
   const row = queryRow(index);
@@ -68,7 +86,7 @@ const renderLettersFeedback = (index, feedback) => {
 };
 
 /**
- * Renders the invalid guess feedback by highlighting it in red.
+ * Renders the feedback for an invalid guess by adding a class that will show it in red.
  */
 const renderInvalidGuessFeedback = (index) => {
   const row = queryRow(index);
@@ -77,9 +95,9 @@ const renderInvalidGuessFeedback = (index) => {
 };
 
 /**
- * Renders feedback when game is over.
- * If the player wins adds a nice choreography animation.
- * If the player loses, does nothing.
+ * Renders the feedback when game is over:
+ * - If the player wins, adds a class with a nice choreography animation.
+ * - If the player loses, does nothing.
  */
 const renderGameOverFeedback = (index, win) => {
   if (!win) return; // TODO: feedback for losing?
@@ -97,7 +115,8 @@ const renderGameOverFeedback = (index, win) => {
 };
 
 /**
- * Renders the feedback on each key of the virtual keyboard.
+ * Renders the feedback on each key of the virtual keyboard
+ * by adding a class that will show them in their corresponding color.
  */
 const renderVirtualKeysFeedback = (keyHistory) => {
   // wait for the flip animation to complete
@@ -118,16 +137,16 @@ const renderVirtualKeysFeedback = (keyHistory) => {
 //#region ===== Modals =====
 
 const initModals = (GA) => {
-  const aboutDialog = document.querySelector(".about-dialog");
-  const aboutShowButton = document.querySelector(".about-dialog-show-btn");
-  const aboutCloseButton = document.querySelector(".about-dialog-close-btn");
+  const aboutDialog = queryAboutDialog();
+  const showAboutDialogButton = queryAboutDialogShowBtn();
+  const closeAboutDialogButton = queryAboutDialogCloseBtn();
 
-  aboutShowButton.addEventListener("click", () => {
+  showAboutDialogButton.addEventListener("click", () => {
     aboutDialog.showModal();
     GA.trackAboutDialog(true);
   });
 
-  aboutCloseButton.addEventListener("click", () => {
+  closeAboutDialogButton.addEventListener("click", () => {
     aboutDialog.close();
   });
 
@@ -170,9 +189,19 @@ const isVirtualKeyBoardFocused = () =>
   isVirtualKeyBoard(document.activeElement);
 
 /**
+ * Focus element
+ */
+const focusElement = (element) => element.focus();
+
+/**
  * Removes focus from given element.
  */
 const removeFocus = (element) => element.blur();
+
+/**
+ * Sets focus to the first focusable element in the UI.
+ */
+const focusFirstElement = () => focusElement(queryAboutDialogShowBtn());
 
 /**
  * Removes the focus form the active focused element.
@@ -208,6 +237,7 @@ const init = (GA) => {
 //#endregion Init
 
 export default {
+  focusFirstElement,
   init,
   isVirtualKeyBoardFocused,
   noActiveElement,
