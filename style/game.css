@@ -96,6 +96,12 @@
 
 @media screen and (min-width: 375px) {
   .board {
+    max-height: 450px;
+  }
+}
+
+@media screen and (min-width: 420px) {
+  .board {
     max-height: 500px;
   }
 }
