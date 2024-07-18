@@ -47,6 +47,7 @@
 }
 
 /* Navbar */
+
 .nav {
   position: absolute;
   right: 1rem;
@@ -60,42 +61,19 @@
   height: calc(100% - var(--header-height));
 }
 
-/* Table Layout */
-
-.table {
-  display: grid;
-  gap: 5px;
-  grid-template-rows: repeat(6, 1fr);
-  justify-items: center;
-}
-
-/* Row Layout */
-
-.row {
-  display: grid;
-  gap: 5px;
-  grid-template-columns: repeat(5, 1fr);
-}
-
-/* Box Layout */
-
-.box {
-  align-items: center;
-  aspect-ratio: 1;
-  border-radius: 3px;
-  border: 1px solid var(--light-gray);
-  display: flex;
-  height: 100%;
-  justify-content: center;
-}
-
 /* Game Board */
 
 .board {
+  aspect-ratio: 5/6;
+  display: grid;
   flex-basis: 100%;
+  gap: 5px;
+  grid-template-rows: repeat(6, 1fr);
+  justify-items: center;
   margin: 0 auto;
   max-height: 385px;
-  padding: 1rem 0;
+  min-height: 385px;
+  padding: 1rem;
 }
 
 @media screen and (min-width: 375px) {
@@ -105,6 +83,13 @@
 }
 
 /* Guess Row */
+
+.row {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: repeat(5, 1fr);
+  width: 100%;
+}
 
 .guess--invalid {
   animation: shake var(--shake-speed) cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -125,7 +110,15 @@
   animation-timing-function: ease-in-out;
 }
 
-/* Letter */
+/* Letter Box */
+
+.box {
+  align-items: center;
+  border-radius: 3px;
+  border: 1px solid var(--light-gray);
+  display: flex;
+  justify-content: center;
+}
 
 .letter {
   animation: typing var(--typing-speed) ease-out;

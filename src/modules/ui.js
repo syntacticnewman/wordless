@@ -26,9 +26,9 @@ const queryAboutDialogCloseBtn = () =>
   document.querySelector(".about-dialog-close-btn");
 
 /**
- * Returns all rows (guesses).
+ * Returns all rows.
  */
-const queryAllRows = () => document.querySelectorAll(".guess.row");
+const queryAllRows = () => document.querySelectorAll(".row");
 
 /**
  * Returns a single row by index.
@@ -36,7 +36,7 @@ const queryAllRows = () => document.querySelectorAll(".guess.row");
 const queryRow = (index) => queryAllRows().item(index);
 
 /**
- * Returns all boxes (letters) within a row (guess).
+ * Returns all boxes (letters) within a row.
  */
 const queryBoxes = (row) => row.querySelectorAll(".box");
 
