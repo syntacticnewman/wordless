@@ -1,7 +1,7 @@
 @import "./base.css";
 @import "./keyframes.css";
 
-/* Header Section */
+/* #region Header Section */
 
 .header {
   align-items: center;
@@ -53,7 +53,24 @@
   right: 1rem;
 }
 
-/* Main */
+/* Show About Dialog Button */
+
+.about-dialog-show-btn {
+  --btn-color: var(--dark-gray);
+  --btn-size: 25px;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 2px solid var(--btn-color);
+  color: var(--btn-color);
+  font-size: 1rem;
+  font-weight: bold;
+  height: var(--btn-size);
+  width: var(--btn-size);
+}
+
+/* #endregion Header Section */
+
+/* #region Main Section */
 
 .main {
   display: flex;
@@ -179,22 +196,9 @@ virtual-keyboard:focus {
   }
 }
 
-/* Show About Dialog Button */
+/* #endregion Main Section */
 
-.about-dialog-show-btn {
-  --btn-color: var(--dark-gray);
-  --btn-size: 25px;
-  background-color: transparent;
-  border-radius: 50%;
-  border: 2px solid var(--btn-color);
-  color: var(--btn-color);
-  font-size: 1rem;
-  font-weight: bold;
-  height: var(--btn-size);
-  width: var(--btn-size);
-}
-
-/* About Dialog */
+/* #region About Dialog */
 
 .about-dialog {
   border: 1.5px solid var(--black);
@@ -314,3 +318,5 @@ virtual-keyboard:focus {
     margin-top: 2rem;
   }
 }
+
+/* #endregion About Dialog */
