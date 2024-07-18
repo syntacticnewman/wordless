@@ -155,6 +155,13 @@
 /* Virtual Keyboard Component */
 
 virtual-keyboard {
+  --vk-key-color: var(--black);
+  --vk-key-bg-color: var(--light-gray);
+  --vk-key-outline-color: var(--outline-color);
+  --vk-key-on-state-color: var(--white);
+  --vk-key-correct-color: var(--green);
+  --vk-key-wrong-color: var(--yellow);
+  --vk-key-incorrect-color: var(--dark-gray);
   align-items: flex-end;
   display: flex;
   justify-content: center;
