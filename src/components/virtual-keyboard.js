@@ -182,10 +182,12 @@ class VirtualKeyboard extends HTMLElement {
 
     this.language = document.documentElement.lang;
 
-    // use the layout in the document's language or the layout in English as a fallback
+    // Use the layout in the document's language or the layout in English as a fallback.
     this.layout = LAYOUT[this.language] ?? LAYOUT[defaultLanguage];
 
-    this.root = this.attachShadow({ mode: "open" });
+    // Setting `delegatesFocus` to true helps in Firefox to remove focus
+    // when `document.activeElement.blur()` is called.
+    this.root = this.attachShadow({ mode: "open", delegatesFocus: true });
 
     this.loadCSS();
   }

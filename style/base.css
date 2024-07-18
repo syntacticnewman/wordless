@@ -8,6 +8,7 @@
   --yellow: #f2b705;
   --green: #91bf63;
   --red: #c53a50;
+  --outline-color: #d71ef7;
   /* Font */
   --serif: "Suez One", serif;
   --sans: "Secular One", sans-serif;
@@ -53,6 +54,7 @@ h3 {
 }
 
 /* Reduced Motion */
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0s !important;

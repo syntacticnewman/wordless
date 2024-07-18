@@ -39,6 +39,10 @@
   user-select: none;
 }
 
+.virtual-key:focus {
+  outline: 2px solid var(--vk-outline-color);
+}
+
 @media screen and (min-width: 375px) {
   .virtual-key {
     min-height: 3rem;
