@@ -80,41 +80,34 @@ const createVirtualKeyboard = (layout) => {
   return virtualKeyboard;
 };
 
-const addFocusTrap = (root) => {
+const addKeyboardNavigation = (root) => {
   const allKeys = root.querySelectorAll(".virtual-key");
-  const firstKey = allKeys.item(0);
-  const lastKey = allKeys.item(allKeys.length - 1);
 
-  firstKey.addEventListener("keydown", (event) => {
-    if ("Tab" === event.key && event.shiftKey) {
-      event.preventDefault();
-      lastKey.focus();
+  const findKeyIndex = (currentKey, keys) =>
+    Array.from(keys).findIndex((key) => currentKey === key);
+
+  const getNextKey = (current, shiftKey) => {
+    const i = findKeyIndex(current, allKeys);
+
+    if (shiftKey) {
+      // go left
+      return allKeys.item((i - 1 + allKeys.length) % allKeys.length);
+    } else {
+      // go right
+      return allKeys.item((i + 1) % allKeys.length);
     }
-  });
-
-  lastKey.addEventListener("keydown", (event) => {
-    if ("Tab" === event.key && !event.shiftKey) {
-      event.preventDefault();
-      firstKey.focus();
-    }
-  });
-};
-
-const addArrowKeysNavigation = (root) => {
-  const findKeyIndex = (row, current) => {
-    return Array.from(row.children).findIndex((key) => current === key);
   };
 
   const getRightKey = (current) => {
     const row = current.parentNode;
-    const i = findKeyIndex(row, current);
+    const i = findKeyIndex(current, row.children);
 
     return row.children[(i + 1) % row.children.length];
   };
 
   const getLeftKey = (current) => {
     const row = current.parentNode;
-    const i = findKeyIndex(row, current);
+    const i = findKeyIndex(current, row.children);
 
     return row.children[(i - 1 + row.children.length) % row.children.length];
   };
@@ -124,7 +117,7 @@ const addArrowKeysNavigation = (root) => {
 
     if (!row.nextSibling) return null;
 
-    const i = findKeyIndex(row, current);
+    const i = findKeyIndex(current, row.children);
     const nextRow = row.nextSibling;
 
     if (i >= nextRow.children.length) {
@@ -139,7 +132,7 @@ const addArrowKeysNavigation = (root) => {
 
     if (!row.previousSibling) return null;
 
-    const i = findKeyIndex(row, current);
+    const i = findKeyIndex(current, row.children);
     const prevRow = row.previousSibling;
 
     if (i >= prevRow.children.length) {
@@ -153,6 +146,9 @@ const addArrowKeysNavigation = (root) => {
     let nextKey = null;
 
     switch (event.key) {
+      case "Tab":
+        nextKey = getNextKey(root.activeElement, event.shiftKey);
+        break;
       case "ArrowRight":
         nextKey = getRightKey(root.activeElement);
         break;
@@ -203,8 +199,7 @@ class VirtualKeyboard extends HTMLElement {
 
   connectedCallback() {
     this.root.appendChild(createVirtualKeyboard(this.layout));
-    addFocusTrap(this.root);
-    addArrowKeysNavigation(this.root);
+    addKeyboardNavigation(this.root);
   }
 }
 
