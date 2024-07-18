@@ -41,12 +41,20 @@ const queryRow = (index) => queryAllRows().item(index);
 const queryBoxes = (row) => row.querySelectorAll(".box");
 
 /**
+ * Returns the fist focusable element.
+ */
+const queryFirstFocusableElement = () => queryAboutDialogShowBtn();
+
+/**
+ * Returns the virtual keyboard component.
+ */
+const queryVirtualKeyboard = () => document.querySelector("virtual-keyboard");
+
+/**
  * Returns all the virtual key from the virtual keyboard.
  */
 const queryVirtualKeys = () =>
-  document
-    .querySelector("virtual-keyboard")
-    .shadowRoot.querySelectorAll(".virtual-key");
+  queryVirtualKeyboard().shadowRoot.querySelectorAll(".virtual-key");
 
 //#endregion Queries
 
@@ -179,17 +187,6 @@ const stopLoading = () => {
 };
 
 /**
- * Checks if the given element is the virtual keyboard.
- */
-const isVirtualKeyBoard = (element) => "VIRTUAL-KEYBOARD" === element.tagName;
-
-/**
- * Returns if the virtual keyboard is focused
- */
-const isVirtualKeyBoardFocused = () =>
-  isVirtualKeyBoard(document.activeElement);
-
-/**
  * Focus element
  */
 const focusElement = (element) => element.focus();
@@ -198,11 +195,6 @@ const focusElement = (element) => element.focus();
  * Removes focus from given element.
  */
 const removeFocus = (element) => element.blur();
-
-/**
- * Sets focus to the first focusable element in the UI.
- */
-const focusFirstElement = () => focusElement(queryAboutDialogShowBtn());
 
 /**
  * Removes the focus form the active focused element.
@@ -224,6 +216,33 @@ const isActiveElementBody = () => "BODY" === document.activeElement.tagName;
  */
 const noActiveElement = () => isActiveElementNull() || isActiveElementBody();
 
+/**
+ * Returns if the focus is in the first element.
+ */
+const isFirstElementFocused = () =>
+  queryFirstFocusableElement() === document.activeElement;
+
+/**
+ * Sets focus to the first focusable element in the UI.
+ */
+const focusFirstElement = () => focusElement(queryFirstFocusableElement());
+
+/**
+ * Returns if the given element is the virtual keyboard.
+ */
+const isVirtualKeyBoard = (element) => "VIRTUAL-KEYBOARD" === element.tagName;
+
+/**
+ * Returns if the virtual keyboard is focused.
+ */
+const isVirtualKeyBoardFocused = () =>
+  isVirtualKeyBoard(document.activeElement);
+
+/**
+ * Sets focus to the virtual keyboard.
+ */
+const focusVirtualKeyboard = () => focusElement(queryVirtualKeyboard());
+
 //#endregion Utils
 
 //#region ===== Init =====
@@ -239,7 +258,9 @@ const init = () => {
 
 export default {
   focusFirstElement,
+  focusVirtualKeyboard,
   init,
+  isFirstElementFocused,
   isVirtualKeyBoardFocused,
   noActiveElement,
   renderGameOverFeedback,
