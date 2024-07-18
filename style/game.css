@@ -65,6 +65,7 @@
   font-size: 1rem;
   font-weight: bold;
   height: var(--btn-size);
+  padding: 0;
   width: var(--btn-size);
 }
 
