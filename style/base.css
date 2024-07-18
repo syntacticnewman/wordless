@@ -53,6 +53,12 @@ h3 {
   margin: 0;
 }
 
+/* Universal Focus Indicator */
+
+*:focus {
+  outline: 2px solid var(--outline-color);
+}
+
 /* Reduced Motion */
 
 @media (prefers-reduced-motion: reduce) {

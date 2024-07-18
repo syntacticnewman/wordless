@@ -162,25 +162,29 @@ virtual-keyboard {
   min-height: 146px;
 }
 
+virtual-keyboard:focus {
+  outline: none;
+}
+
 @media screen and (min-width: 375px) {
   virtual-keyboard {
     min-height: 170px;
   }
 }
 
-/* About Button */
+/* Show About Dialog Button */
 
 .about-dialog-show-btn {
   --btn-color: var(--dark-gray);
+  --btn-size: 25px;
   background-color: transparent;
-  border-radius: 15px;
+  border-radius: 50%;
   border: 2px solid var(--btn-color);
   color: var(--btn-color);
   font-size: 1rem;
   font-weight: bold;
-  margin: 0;
-  padding: 0;
-  width: 1.5rem;
+  height: var(--btn-size);
+  width: var(--btn-size);
 }
 
 /* About Dialog */
@@ -227,7 +231,7 @@ virtual-keyboard {
   }
 }
 
-/* About Dialog Close Button */
+/* Close About Dialog Button */
 
 .about-dialog-close-btn {
   --btn-color: var(--black);
