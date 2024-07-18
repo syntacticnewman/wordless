@@ -1,3 +1,14 @@
+:host {
+  /* Key Colors */
+  --key-color: var(--vk-key-color, black);
+  --key-bg-color: var(--vk-key-bg-color, lightgray);
+  --key-outline-color: var(--vk-key-outline-color, magenta);
+  --key-on-state-color: var(--vk-key-on-state-color, white);
+  --key-correct-color: var(--vk-key-correct-color, limegreen);
+  --key-wrong-color: var(--vk-key-wrong-color, gold);
+  --key-incorrect-color: var(--vk-key-incorrect-color, gray);
+}
+
 /* Keyboard layout */
 
 .keyboard-layout {
@@ -22,10 +33,10 @@
 
 .virtual-key {
   align-items: center;
-  background-color: var(--light-gray);
+  background-color: var(--key-bg-color);
   border-radius: 3px;
   border: 0;
-  color: var(--black);
+  color: var(--key-color);
   display: flex;
   font-size: 1rem;
   font-weight: bold;
@@ -40,7 +51,7 @@
 }
 
 .virtual-key:focus {
-  outline: 2px solid var(--vk-outline-color);
+  outline: 2px solid var(--key-outline-color);
 }
 
 @media screen and (min-width: 375px) {
@@ -69,16 +80,16 @@
 /* Feedback states */
 
 .virtual-key.correct {
-  color: var(--white);
-  background-color: var(--green);
+  color: var(--key-on-state-color);
+  background-color: var(--key-correct-color);
 }
 
 .virtual-key.wrong {
-  color: var(--white);
-  background-color: var(--yellow);
+  color: var(--key-on-state-color);
+  background-color: var(--key-wrong-color);
 }
 
 .virtual-key.incorrect {
-  color: var(--white);
-  background-color: var(--dark-gray);
+  color: var(--key-on-state-color);
+  background-color: var(--key-incorrect-color);
 }

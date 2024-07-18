@@ -99,7 +99,17 @@
           <div class="box"></div>
         </div>
       </div>
-      <virtual-keyboard style="--vk-outline-color: var(--outline-color)" />
+      <virtual-keyboard
+        style="
+          --vk-key-color: var(--black);
+          --vk-key-bg-color: var(--light-gray);
+          --vk-key-outline-color: var(--outline-color);
+          --vk-key-on-state-color: var(--white);
+          --vk-key-correct-color: var(--green);
+          --vk-key-wrong-color: var(--yellow);
+          --vk-key-incorrect-color: var(--dark-gray);
+        "
+      />
     </main>
     <dialog class="about-dialog">
       <header class="about-dialog-header">
