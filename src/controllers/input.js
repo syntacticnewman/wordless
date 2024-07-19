@@ -1,19 +1,6 @@
 import Buffer from "../services/buffer.js";
 import Keyboard from "../modules/keyboard.js";
-import UI from "../modules/ui.js";
-
-//#region ===== Utils =====
-
-/**
- * Removes all the contents of the input buffer.
- */
-const clear = () => {
-  Buffer.flush();
-};
-
-//#endregion Utils
-
-//#region ===== Events =====
+import * as UI from "../ui/utils.js";
 
 export const INPUT_CHANGE_EVENT = "winputchange";
 export const INPUT_SUBMIT_EVENT = "winputsubmit";
@@ -35,10 +22,6 @@ const notifyInputSubmit = () => {
     new CustomEvent(INPUT_SUBMIT_EVENT, { detail: Buffer.getValue() })
   );
 };
-
-//#endregion Events
-
-//#region ===== Handlers =====
 
 /**
  * When a letter key is pressed,
@@ -136,9 +119,12 @@ const handleKey = (key, virtualKey = false) => {
   return false;
 };
 
-//#endregion Handlers
-
-//#region ===== Init =====
+/**
+ * Removes all the contents of the input buffer.
+ */
+const clear = () => {
+  Buffer.flush();
+};
 
 /**
  * Registers the event handlers for the virtual keyboard
@@ -161,6 +147,4 @@ const init = () => {
   });
 };
 
-//#endregion Init
-
-export default { init, clear };
+export default { clear, init };
