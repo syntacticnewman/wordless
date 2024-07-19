@@ -1,24 +1,24 @@
 import {
-  queryAboutDialog,
-  queryAboutDialogShowBtn,
-  queryAboutDialogCloseBtn,
+  queryAboutModal,
+  queryShowAboutModalBtn,
+  queryCloseAboutModalBtn,
 } from "./queries.js";
 
 export const initAboutModal = ({ onShow, onClose }) => {
-  const aboutDialog = queryAboutDialog();
-  const showAboutDialogButton = queryAboutDialogShowBtn();
-  const closeAboutDialogButton = queryAboutDialogCloseBtn();
+  const aboutModal = queryAboutModal();
+  const showAboutModalBtn = queryShowAboutModalBtn();
+  const closeAboutModalBtn = queryCloseAboutModalBtn();
 
-  showAboutDialogButton.addEventListener("click", () => {
-    aboutDialog.showModal();
+  showAboutModalBtn.addEventListener("click", () => {
+    aboutModal.showModal();
     onShow();
   });
 
-  closeAboutDialogButton.addEventListener("click", () => {
-    aboutDialog.close();
+  closeAboutModalBtn.addEventListener("click", () => {
+    aboutModal.close();
   });
 
-  aboutDialog.addEventListener("close", () => {
+  aboutModal.addEventListener("close", () => {
     onClose();
   });
 };

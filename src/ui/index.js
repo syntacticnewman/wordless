@@ -5,8 +5,8 @@ import { initAboutModal } from "./modals.js";
 const init = () => {
   // initialize modals
   initAboutModal({
-    onShow: () => GA.trackAboutDialog(true),
-    onClose: () => GA.trackAboutDialog(false),
+    onShow: () => GA.trackAboutModal(true),
+    onClose: () => GA.trackAboutModal(false),
   });
 
   // load custom components
