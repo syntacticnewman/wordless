@@ -1,3 +1,4 @@
+import Keyboard from "../modules/keyboard.js";
 import {
   queryAboutModal,
   queryShowAboutModalBtn,
@@ -16,6 +17,13 @@ export const initAboutModal = ({ onShow, onClose }) => {
 
   closeAboutModalBtn.addEventListener("click", () => {
     aboutModal.close();
+  });
+
+  aboutModal.addEventListener("keydown", (event) => {
+    if (Keyboard.isEsc(event.key)) {
+      event.stopPropagation();
+      aboutModal.close();
+    }
   });
 
   aboutModal.addEventListener("close", () => {
