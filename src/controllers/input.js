@@ -82,6 +82,8 @@ const handleTabKey = () => {
     return true;
   }
 
+  // NOTE: This manual focus is needed for Safari to work,
+  // otherwise it ignores the virtual keyboard while navigating with the Tab key.
   if (UI.isFirstElementFocused()) {
     UI.focusVirtualKeyboard();
     return true;

@@ -81,43 +81,66 @@ const createVirtualKeyboard = (layout) => {
 };
 
 const addKeyboardNavigation = (root) => {
+  /**
+   * All virtual keys in the virtual keyboard.
+   */
   const allKeys = root.querySelectorAll(".virtual-key");
 
-  const findKeyIndex = (currentKey, keys) =>
+  /**
+   * Returns the index of a key in the array of keys.
+   */
+  const findKeyIndex = (keys, currentKey) =>
     Array.from(keys).findIndex((key) => currentKey === key);
 
-  const getNextKey = (current, shiftKey) => {
-    const i = findKeyIndex(current, allKeys);
+  /**
+   * Returns the next key (with circular array indexing) from the given index.
+   */
+  const nextKey = (keys, index) => keys[(index + 1) % keys.length];
 
+  /**
+   * Returns the previous key (with circular array indexing) from the given index.
+   */
+  const prevKey = (keys, index) =>
+    keys[(index - 1 + keys.length) % keys.length];
+
+  /**
+   * When Tab, returns the next key, or the previous one if Shift is pressed.
+   */
+  const getNextKey = (current, shiftKey) => {
     if (shiftKey) {
-      // go left
-      return allKeys.item((i - 1 + allKeys.length) % allKeys.length);
+      return prevKey(allKeys, findKeyIndex(allKeys, current));
     } else {
-      // go right
-      return allKeys.item((i + 1) % allKeys.length);
+      return nextKey(allKeys, findKeyIndex(allKeys, current));
     }
   };
 
+  /**
+   * When ArrowRight, returns the key to the right in the same row.
+   */
   const getRightKey = (current) => {
-    const row = current.parentNode;
-    const i = findKeyIndex(current, row.children);
+    const keys = current.parentNode.children;
 
-    return row.children[(i + 1) % row.children.length];
+    return nextKey(keys, findKeyIndex(keys, current));
   };
 
+  /**
+   * When ArrowLeft, returns the key to the left in the same row.
+   */
   const getLeftKey = (current) => {
-    const row = current.parentNode;
-    const i = findKeyIndex(current, row.children);
+    const keys = current.parentNode.children;
 
-    return row.children[(i - 1 + row.children.length) % row.children.length];
+    return prevKey(keys, findKeyIndex(keys, current));
   };
 
+  /**
+   * When ArrowDown, returns the key below from the next row.
+   */
   const getBottomKey = (current) => {
     const row = current.parentNode;
 
     if (!row.nextSibling) return null;
 
-    const i = findKeyIndex(current, row.children);
+    const i = findKeyIndex(row.children, current);
     const nextRow = row.nextSibling;
 
     if (i >= nextRow.children.length) {
@@ -127,12 +150,15 @@ const addKeyboardNavigation = (root) => {
     }
   };
 
+  /**
+   * When ArrowUp, returns the key above from the previous row.
+   */
   const getTopKey = (current) => {
     const row = current.parentNode;
 
     if (!row.previousSibling) return null;
 
-    const i = findKeyIndex(current, row.children);
+    const i = findKeyIndex(row.children, current);
     const prevRow = row.previousSibling;
 
     if (i >= prevRow.children.length) {
