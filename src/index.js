@@ -1,14 +1,16 @@
-import Wordless from "./controllers/wordless.js";
 import Store from "./services/store.js";
+import UI from "./ui/index.js";
+import Wordless from "./controllers/wordless.js";
 
-window.wordless = {
-  store: Store,
-  async start() {
-    // initialize store
-    wordless.store.init({ keyHistory: {}, loading: false });
-    // start the game
-    await Wordless.start();
-  },
-};
+window.wordless = { store: Store };
 
-document.addEventListener("DOMContentLoaded", wordless.start);
+document.addEventListener("DOMContentLoaded", async () => {
+  // load UI components
+  UI.init();
+
+  // initialize store
+  Store.init({ keyHistory: {}, loading: false });
+
+  // start the game
+  await Wordless.start();
+});

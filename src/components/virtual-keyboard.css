@@ -1,4 +1,15 @@
-/* Keyboard layout */
+:host {
+  /* Key Colors */
+  --key-bg-color: var(--vk-key-bg-color, lightgray);
+  --key-color: var(--vk-key-color, black);
+  --key-correct-color: var(--vk-key-correct-color, limegreen);
+  --key-incorrect-color: var(--vk-key-incorrect-color, gray);
+  --key-on-state-color: var(--vk-key-on-state-color, white);
+  --key-outline-color: var(--vk-key-outline-color, magenta);
+  --key-wrong-color: var(--vk-key-wrong-color, gold);
+}
+
+/* Keyboard Layout */
 
 .keyboard-layout {
   display: flex;
@@ -8,7 +19,7 @@
   margin: 0 auto;
 }
 
-/* Keyboard rows */
+/* Keyboard Rows */
 
 .key-row {
   display: flex;
@@ -18,14 +29,14 @@
   justify-content: center;
 }
 
-/* Keyboard keys */
+/* Keyboard Keys */
 
 .virtual-key {
   align-items: center;
-  background-color: var(--light-gray);
+  background-color: var(--key-bg-color);
   border-radius: 3px;
   border: 0;
-  color: var(--black);
+  color: var(--key-color);
   display: flex;
   font-size: 1rem;
   font-weight: bold;
@@ -37,6 +48,10 @@
   transition-duration: 50ms;
   transition-property: min-height, min-width;
   user-select: none;
+}
+
+.virtual-key:focus {
+  outline: 2px solid var(--key-outline-color);
 }
 
 @media screen and (min-width: 375px) {
@@ -62,19 +77,19 @@
   min-width: 3rem;
 }
 
-/* Feedback states */
+/* Feedback States */
 
 .virtual-key.correct {
-  color: var(--white);
-  background-color: var(--green);
+  color: var(--key-on-state-color);
+  background-color: var(--key-correct-color);
 }
 
 .virtual-key.wrong {
-  color: var(--white);
-  background-color: var(--yellow);
+  color: var(--key-on-state-color);
+  background-color: var(--key-wrong-color);
 }
 
 .virtual-key.incorrect {
-  color: var(--white);
-  background-color: var(--dark-gray);
+  color: var(--key-on-state-color);
+  background-color: var(--key-incorrect-color);
 }

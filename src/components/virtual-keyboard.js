@@ -80,51 +80,67 @@ const createVirtualKeyboard = (layout) => {
   return virtualKeyboard;
 };
 
-const addFocusTrap = (root) => {
+const addKeyboardNavigation = (root) => {
+  /**
+   * All virtual keys in the virtual keyboard.
+   */
   const allKeys = root.querySelectorAll(".virtual-key");
-  const firstKey = allKeys.item(0);
-  const lastKey = allKeys.item(allKeys.length - 1);
 
-  firstKey.addEventListener("keydown", (event) => {
-    if ("Tab" === event.key && event.shiftKey) {
-      event.preventDefault();
-      lastKey.focus();
+  /**
+   * Returns the index of a key in the array of keys.
+   */
+  const findKeyIndex = (keys, currentKey) =>
+    Array.from(keys).findIndex((key) => currentKey === key);
+
+  /**
+   * Returns the next key (with circular array indexing) from the given index.
+   */
+  const nextKey = (keys, index) => keys[(index + 1) % keys.length];
+
+  /**
+   * Returns the previous key (with circular array indexing) from the given index.
+   */
+  const prevKey = (keys, index) =>
+    keys[(index - 1 + keys.length) % keys.length];
+
+  /**
+   * When Tab, returns the next key, or the previous one if Shift is pressed.
+   */
+  const getNextKey = (current, shiftKey) => {
+    if (shiftKey) {
+      return prevKey(allKeys, findKeyIndex(allKeys, current));
+    } else {
+      return nextKey(allKeys, findKeyIndex(allKeys, current));
     }
-  });
-
-  lastKey.addEventListener("keydown", (event) => {
-    if ("Tab" === event.key && !event.shiftKey) {
-      event.preventDefault();
-      firstKey.focus();
-    }
-  });
-};
-
-const addArrowKeysNavigation = (root) => {
-  const findKeyIndex = (row, current) => {
-    return Array.from(row.children).findIndex((key) => current === key);
   };
 
+  /**
+   * When ArrowRight, returns the key to the right in the same row.
+   */
   const getRightKey = (current) => {
-    const row = current.parentNode;
-    const i = findKeyIndex(row, current);
+    const keys = current.parentNode.children;
 
-    return row.children[(i + 1) % row.children.length];
+    return nextKey(keys, findKeyIndex(keys, current));
   };
 
+  /**
+   * When ArrowLeft, returns the key to the left in the same row.
+   */
   const getLeftKey = (current) => {
-    const row = current.parentNode;
-    const i = findKeyIndex(row, current);
+    const keys = current.parentNode.children;
 
-    return row.children[(i - 1 + row.children.length) % row.children.length];
+    return prevKey(keys, findKeyIndex(keys, current));
   };
 
+  /**
+   * When ArrowDown, returns the key below from the next row.
+   */
   const getBottomKey = (current) => {
     const row = current.parentNode;
 
     if (!row.nextSibling) return null;
 
-    const i = findKeyIndex(row, current);
+    const i = findKeyIndex(row.children, current);
     const nextRow = row.nextSibling;
 
     if (i >= nextRow.children.length) {
@@ -134,12 +150,15 @@ const addArrowKeysNavigation = (root) => {
     }
   };
 
+  /**
+   * When ArrowUp, returns the key above from the previous row.
+   */
   const getTopKey = (current) => {
     const row = current.parentNode;
 
     if (!row.previousSibling) return null;
 
-    const i = findKeyIndex(row, current);
+    const i = findKeyIndex(row.children, current);
     const prevRow = row.previousSibling;
 
     if (i >= prevRow.children.length) {
@@ -153,6 +172,9 @@ const addArrowKeysNavigation = (root) => {
     let nextKey = null;
 
     switch (event.key) {
+      case "Tab":
+        nextKey = getNextKey(root.activeElement, event.shiftKey);
+        break;
       case "ArrowRight":
         nextKey = getRightKey(root.activeElement);
         break;
@@ -182,10 +204,12 @@ class VirtualKeyboard extends HTMLElement {
 
     this.language = document.documentElement.lang;
 
-    // use the layout in the document's language or the layout in English as a fallback
+    // Use the layout in the document's language or the layout in English as a fallback.
     this.layout = LAYOUT[this.language] ?? LAYOUT[defaultLanguage];
 
-    this.root = this.attachShadow({ mode: "open" });
+    // Setting `delegatesFocus` to true helps in Firefox to remove focus
+    // when `document.activeElement.blur()` is called.
+    this.root = this.attachShadow({ mode: "open", delegatesFocus: true });
 
     this.loadCSS();
   }
@@ -201,8 +225,7 @@ class VirtualKeyboard extends HTMLElement {
 
   connectedCallback() {
     this.root.appendChild(createVirtualKeyboard(this.layout));
-    addFocusTrap(this.root);
-    addArrowKeysNavigation(this.root);
+    addKeyboardNavigation(this.root);
   }
 }
 

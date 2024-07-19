@@ -1,6 +1,6 @@
 import GA from "../services/analytics.js";
 import Game from "../modules/game.js";
-import UI from "../modules/ui.js";
+import * as UI from "../ui/render.js";
 import Input, { INPUT_CHANGE_EVENT, INPUT_SUBMIT_EVENT } from "./input.js";
 
 /**
@@ -139,9 +139,6 @@ const stopLoading = () => {
  * Registers the event handlers for user input and initializes the game.
  */
 const start = async () => {
-  // load UI components
-  UI.init();
-
   // load Input controller
   Input.init();
 

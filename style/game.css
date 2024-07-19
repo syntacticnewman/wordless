@@ -1,7 +1,8 @@
 @import "./base.css";
 @import "./keyframes.css";
 
-/* Header Section */
+/* Header Section
+ * ========================================================================== */
 
 .header {
   align-items: center;
@@ -12,7 +13,7 @@
   justify-content: center;
 }
 
-/* Game Title */
+/* Title */
 
 .wordless-title {
   display: flex;
@@ -53,7 +54,24 @@
   right: 1rem;
 }
 
-/* Main */
+/* About Button */
+
+.about-dialog-show-btn {
+  --btn-color: var(--dark-gray);
+  --btn-size: 25px;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 2px solid var(--btn-color);
+  color: var(--btn-color);
+  font-size: 1rem;
+  font-weight: bold;
+  height: var(--btn-size);
+  padding: 0;
+  width: var(--btn-size);
+}
+
+/* Main Section
+ * ========================================================================== */
 
 .main {
   display: flex;
@@ -61,7 +79,7 @@
   height: calc(100% - var(--header-height));
 }
 
-/* Game Board */
+/* Board */
 
 .board {
   aspect-ratio: 5/6;
@@ -78,11 +96,17 @@
 
 @media screen and (min-width: 375px) {
   .board {
+    max-height: 450px;
+  }
+}
+
+@media screen and (min-width: 420px) {
+  .board {
     max-height: 500px;
   }
 }
 
-/* Guess Row */
+/* Guess/Row */
 
 .row {
   display: grid;
@@ -110,7 +134,7 @@
   animation-timing-function: ease-in-out;
 }
 
-/* Letter Box */
+/* Letter/Box */
 
 .box {
   align-items: center;
@@ -152,14 +176,27 @@
   background-color: var(--dark-gray);
 }
 
-/* Virtual Keyboard Component */
+/* Virtual Keyboard Component
+ * ========================================================================== */
 
 virtual-keyboard {
+  --vk-key-bg-color: var(--light-gray);
+  --vk-key-color: var(--black);
+  --vk-key-correct-color: var(--green);
+  --vk-key-incorrect-color: var(--dark-gray);
+  --vk-key-on-state-color: var(--white);
+  --vk-key-outline-color: var(--outline-color);
+  --vk-key-wrong-color: var(--yellow);
+
   align-items: flex-end;
   display: flex;
   justify-content: center;
-  padding-bottom: 1rem;
   min-height: 146px;
+  padding-bottom: 1rem;
+}
+
+virtual-keyboard:focus {
+  outline: none;
 }
 
 @media screen and (min-width: 375px) {
@@ -168,22 +205,8 @@ virtual-keyboard {
   }
 }
 
-/* About Button */
-
-.about-dialog-show-btn {
-  --btn-color: var(--dark-gray);
-  background-color: transparent;
-  border-radius: 15px;
-  border: 2px solid var(--btn-color);
-  color: var(--btn-color);
-  font-size: 1rem;
-  font-weight: bold;
-  margin: 0;
-  padding: 0;
-  width: 1.5rem;
-}
-
-/* About Dialog */
+/* About Dialog
+ * ========================================================================== */
 
 .about-dialog {
   border: 1.5px solid var(--black);
@@ -227,7 +250,7 @@ virtual-keyboard {
   }
 }
 
-/* About Dialog Close Button */
+/* Close About Button */
 
 .about-dialog-close-btn {
   --btn-color: var(--black);
