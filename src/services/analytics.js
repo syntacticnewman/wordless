@@ -48,9 +48,9 @@ const trackGameOver = (isAWin, numberOfTries) => {
   );
 };
 
-const trackAboutDialog = (isOpen) => {
+const trackAboutModal = (isOpen) => {
   track(
-    "about_dialog",
+    "about_modal",
     getEventParams({
       category: CATEGORY.ABOUT_GAME,
       label: "open",
@@ -59,4 +59,4 @@ const trackAboutDialog = (isOpen) => {
   );
 };
 
-export default { trackGuessSubmission, trackGameOver, trackAboutDialog };
+export default { trackGuessSubmission, trackGameOver, trackAboutModal };

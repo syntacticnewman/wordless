@@ -4,21 +4,21 @@
 export const querySpinner = () => document.querySelector(".spinner");
 
 /**
- * Returns the About dialog.
+ * Returns the About modal.
  */
-export const queryAboutDialog = () => document.querySelector(".about-dialog");
+export const queryAboutModal = () => document.querySelector(".about-modal");
 
 /**
- * Returns the "?" (show about dialog) button.
+ * Returns the "?" (show about modal) button.
  */
-export const queryAboutDialogShowBtn = () =>
-  document.querySelector(".about-dialog-show-btn");
+export const queryShowAboutModalBtn = () =>
+  document.querySelector(".about-modal-show-btn");
 
 /**
- * Returns the "X" (close about dialog) button.
+ * Returns the "X" (close about modal) button.
  */
-export const queryAboutDialogCloseBtn = () =>
-  document.querySelector(".about-dialog-close-btn");
+export const queryCloseAboutModalBtn = () =>
+  document.querySelector(".about-modal-close-btn");
 
 /**
  * Returns all guess rows.
@@ -50,4 +50,4 @@ export const queryVirtualKeys = () =>
 /**
  * Returns the first focusable element.
  */
-export const queryFirstFocusableElement = () => queryAboutDialogShowBtn();
+export const queryFirstFocusableElement = () => queryShowAboutModalBtn();

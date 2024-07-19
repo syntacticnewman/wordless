@@ -27,7 +27,7 @@
     <!-- This prevents FOUC for the virtual keyboard -->
     <link
       rel="preload"
-      href="./src/components/virtual-keyboard.css"
+      href="./src/ui/components/virtual-keyboard/styles.css"
       as="style"
     />
     <!-- Game styles -->
@@ -49,7 +49,7 @@
         <span class="gray">s</span>
       </h1>
       <nav class="nav">
-        <button class="about-dialog-show-btn" aria-label="About" title="About">
+        <button class="about-modal-show-btn" aria-label="About" title="About">
           <span aria-hidden="true">?</span>
         </button>
       </nav>
@@ -101,10 +101,10 @@
       </div>
       <virtual-keyboard />
     </main>
-    <dialog class="about-dialog">
-      <header class="about-dialog-header">
+    <dialog class="about-modal">
+      <header class="about-modal-header">
         <h2>About Wordless</h2>
-        <button class="about-dialog-close-btn" aria-label="Close" title="Close">
+        <button class="about-modal-close-btn" aria-label="Close" title="Close">
           <span aria-hidden="true">x</span>
         </button>
       </header>

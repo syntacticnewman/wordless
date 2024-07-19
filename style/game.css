@@ -56,7 +56,7 @@
 
 /* About Button */
 
-.about-dialog-show-btn {
+.about-modal-show-btn {
   --btn-color: var(--dark-gray);
   --btn-size: 25px;
   background-color: transparent;
@@ -205,10 +205,10 @@ virtual-keyboard:focus {
   }
 }
 
-/* About Dialog
+/* About Modal
  * ========================================================================== */
 
-.about-dialog {
+.about-modal {
   border: 1.5px solid var(--black);
   flex-direction: column;
   margin: 0;
@@ -217,12 +217,12 @@ virtual-keyboard:focus {
   padding: 2rem;
 }
 
-.about-dialog[open] {
+.about-modal[open] {
   display: flex;
 }
 
 @media screen and (min-width: 425px) {
-  .about-dialog {
+  .about-modal {
     box-shadow: 0 19px 38px rgb(0 0 0 / 12%), 0 15px 12px rgb(0 0 0 / 22%);
     margin: 0 auto;
     min-height: auto;
@@ -231,28 +231,28 @@ virtual-keyboard:focus {
     transform: translateY(-50%);
   }
 
-  .about-dialog::backdrop {
+  .about-modal::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
   }
 }
 
-/* About Dialog Header */
+/* About Modal Header */
 
-.about-dialog-header {
+.about-modal-header {
   align-items: center;
   display: flex;
   margin-bottom: 3rem;
 }
 
 @media screen and (min-width: 425px) {
-  .about-dialog-header {
+  .about-modal-header {
     margin-bottom: 2rem;
   }
 }
 
 /* Close About Button */
 
-.about-dialog-close-btn {
+.about-modal-close-btn {
   --btn-color: var(--black);
   --btn-size: 32px;
   align-items: center;

@@ -1,5 +1,5 @@
 :host {
-  /* Key Colors */
+  /* Keyboard Key Colors */
   --key-bg-color: var(--vk-key-bg-color, lightgray);
   --key-color: var(--vk-key-color, black);
   --key-correct-color: var(--vk-key-correct-color, limegreen);
