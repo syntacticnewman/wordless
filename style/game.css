@@ -209,20 +209,16 @@ virtual-keyboard:focus {
  * ========================================================================== */
 
 .about-modal {
-  border: 1.5px solid var(--black);
-  flex-direction: column;
+  border: none;
   margin: 0;
   min-height: 100%;
   min-width: 100vw;
-  padding: 2rem;
-}
-
-.about-modal[open] {
-  display: flex;
+  padding: 0;
 }
 
 @media screen and (min-width: 425px) {
   .about-modal {
+    border: 1.5px solid var(--black);
     box-shadow: 0 19px 38px rgb(0 0 0 / 12%), 0 15px 12px rgb(0 0 0 / 22%);
     margin: 0 auto;
     min-height: auto;
@@ -233,6 +229,23 @@ virtual-keyboard:focus {
 
   .about-modal::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* About Modal Content */
+
+.about-modal-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 2rem;
+  position: fixed;
+}
+
+@media screen and (min-width: 425px) {
+  .about-modal-content {
+    height: auto;
+    position: relative;
   }
 }
 
@@ -306,7 +319,7 @@ virtual-keyboard:focus {
 .color-meaning .box {
   --box-size: 42px;
   width: var(--box-size);
-  height: auto;
+  height: var(--box-size);
 }
 
 /* Game Credit */

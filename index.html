@@ -102,34 +102,40 @@
       <virtual-keyboard />
     </main>
     <dialog class="about-modal">
-      <header class="about-modal-header">
-        <h2>About Wordless</h2>
-        <button class="about-modal-close-btn" aria-label="Close" title="Close">
-          <span aria-hidden="true">x</span>
-        </button>
-      </header>
-      <section class="game-instructions">
-        <h3>How to play</h3>
-        <p>Guess the secret five-letter English word in six tries.</p>
-        <div class="color-meaning">
-          <span class="box letter--correct" aria-hidden="true">A</span>
-          <p>Green means the letter is correct and in the right position.</p>
-          <span class="box letter--wrong" aria-hidden="true">A</span>
+      <div class="about-modal-content">
+        <header class="about-modal-header">
+          <h2>About Wordless</h2>
+          <button
+            class="about-modal-close-btn"
+            aria-label="Close"
+            title="Close"
+          >
+            <span aria-hidden="true">x</span>
+          </button>
+        </header>
+        <section class="game-instructions">
+          <h3>How to play</h3>
+          <p>Guess the secret five-letter English word in six tries.</p>
+          <div class="color-meaning">
+            <span class="box letter--correct" aria-hidden="true">A</span>
+            <p>Green means the letter is correct and in the right position.</p>
+            <span class="box letter--wrong" aria-hidden="true">A</span>
+            <p>
+              Yellow means the letter is in the word but in the wrong position.
+            </p>
+            <span class="box letter--incorrect" aria-hidden="true">A</span>
+            <p>Gray means the letter is not in the word.</p>
+          </div>
+        </section>
+        <section class="game-credit">
           <p>
-            Yellow means the letter is in the word but in the wrong position.
+            <small>
+              Developed with 💚 by
+              <a href="https://www.syntacticnewman.dev/">Syntactic Newman</a>
+            </small>
           </p>
-          <span class="box letter--incorrect" aria-hidden="true">A</span>
-          <p>Gray means the letter is not in the word.</p>
-        </div>
-      </section>
-      <section class="game-credit">
-        <p>
-          <small>
-            Developed with 💚 by
-            <a href="https://www.syntacticnewman.dev/">Syntactic Newman</a>
-          </small>
-        </p>
-      </section>
+        </section>
+      </div>
     </dialog>
   </body>
 </html>
