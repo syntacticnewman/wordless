@@ -210,15 +210,10 @@ virtual-keyboard:focus {
 
 .about-modal {
   border: 1.5px solid var(--black);
-  flex-direction: column;
   margin: 0;
   min-height: 100%;
   min-width: 100vw;
-  padding: 2rem;
-}
-
-.about-modal[open] {
-  display: flex;
+  padding: 0;
 }
 
 @media screen and (min-width: 425px) {
@@ -234,6 +229,14 @@ virtual-keyboard:focus {
   .about-modal::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
   }
+}
+
+/* About Modal Content */
+
+.about-modal-content {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
 }
 
 /* About Modal Header */
