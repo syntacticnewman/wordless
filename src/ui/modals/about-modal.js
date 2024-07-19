@@ -18,6 +18,13 @@ const init = ({ onShow, onClose }) => {
     }
   });
 
+  // handle click on backdrop
+  modal.addEventListener("click", (event) => {
+    if (modal === event.target) {
+      modal.close();
+    }
+  });
+
   // show button
   showBtn.addEventListener("click", () => {
     modal.showModal();
