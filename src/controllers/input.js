@@ -96,7 +96,6 @@ const handleEnterKey = (virtualEnterKey) => {
 const handleTabKey = () => {
   if (UI.noActiveElement()) {
     UI.focusFirstElement();
-
     return true;
   }
 

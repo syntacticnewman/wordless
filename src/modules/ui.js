@@ -41,7 +41,7 @@ const queryRow = (index) => queryAllRows().item(index);
 const queryBoxes = (row) => row.querySelectorAll(".box");
 
 /**
- * Returns the fist focusable element.
+ * Returns the first focusable element.
  */
 const queryFirstFocusableElement = () => queryAboutDialogShowBtn();
 
@@ -217,31 +217,26 @@ const isActiveElementBody = () => "BODY" === document.activeElement.tagName;
 const noActiveElement = () => isActiveElementNull() || isActiveElementBody();
 
 /**
+ * Sets focus to the first focusable element in the UI.
+ */
+const focusFirstElement = () => focusElement(queryFirstFocusableElement());
+
+/**
  * Returns if the focus is in the first element.
  */
 const isFirstElementFocused = () =>
   queryFirstFocusableElement() === document.activeElement;
 
 /**
- * Sets focus to the first focusable element in the UI.
+ * Sets focus to the virtual keyboard.
  */
-const focusFirstElement = () => focusElement(queryFirstFocusableElement());
-
-/**
- * Returns if the given element is the virtual keyboard.
- */
-const isVirtualKeyBoard = (element) => "VIRTUAL-KEYBOARD" === element.tagName;
+const focusVirtualKeyboard = () => focusElement(queryVirtualKeyboard());
 
 /**
  * Returns if the virtual keyboard is focused.
  */
 const isVirtualKeyBoardFocused = () =>
-  isVirtualKeyBoard(document.activeElement);
-
-/**
- * Sets focus to the virtual keyboard.
- */
-const focusVirtualKeyboard = () => focusElement(queryVirtualKeyboard());
+  queryVirtualKeyboard() === document.activeElement;
 
 //#endregion Utils
 
