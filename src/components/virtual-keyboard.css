@@ -1,15 +1,15 @@
 :host {
   /* Key Colors */
-  --key-color: var(--vk-key-color, black);
   --key-bg-color: var(--vk-key-bg-color, lightgray);
-  --key-outline-color: var(--vk-key-outline-color, magenta);
-  --key-on-state-color: var(--vk-key-on-state-color, white);
+  --key-color: var(--vk-key-color, black);
   --key-correct-color: var(--vk-key-correct-color, limegreen);
-  --key-wrong-color: var(--vk-key-wrong-color, gold);
   --key-incorrect-color: var(--vk-key-incorrect-color, gray);
+  --key-on-state-color: var(--vk-key-on-state-color, white);
+  --key-outline-color: var(--vk-key-outline-color, magenta);
+  --key-wrong-color: var(--vk-key-wrong-color, gold);
 }
 
-/* Keyboard layout */
+/* Keyboard Layout */
 
 .keyboard-layout {
   display: flex;
@@ -19,7 +19,7 @@
   margin: 0 auto;
 }
 
-/* Keyboard rows */
+/* Keyboard Rows */
 
 .key-row {
   display: flex;
@@ -29,7 +29,7 @@
   justify-content: center;
 }
 
-/* Keyboard keys */
+/* Keyboard Keys */
 
 .virtual-key {
   align-items: center;
@@ -77,7 +77,7 @@
   min-width: 3rem;
 }
 
-/* Feedback states */
+/* Feedback States */
 
 .virtual-key.correct {
   color: var(--key-on-state-color);
