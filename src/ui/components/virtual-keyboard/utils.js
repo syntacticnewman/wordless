@@ -1,12 +1,8 @@
-const defaultLanguage = "en"; // English
+import { backspaceIcon } from "./icons/backspace-icon.js";
 
-const LAYOUT = {
-  en: "qwertyuiop\nasdfghjkl\nBzxcvbnmE",
-};
-
-// Designed by https://iconduck.com/designers/arturo-wibawa
-const backspaceIcon = `<svg fill="none" height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g stroke="var(--black)" stroke-linecap="round" stroke-width="2"><path d="m17 15-6-6m6 0-6 6"/><path d="M7.4 4.8A2 2 0 0 1 9 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H9a2 2 0 0 1-1.6-.8l-4.5-6a2 2 0 0 1 0-2.4z" stroke-linejoin="round"/></g></svg>`;
-
+/**
+ * Creates the button for the virtual key.
+ */
 const createVirtualKey = (key) => {
   const virtualKey = document.createElement("button");
 
@@ -34,6 +30,10 @@ const createVirtualKey = (key) => {
   return virtualKey;
 };
 
+/**
+ * Creates the container row for the virtual keys.
+ * @example Q W E R T Y
+ */
 const createKeyRow = (keys) => {
   const keyRow = document.createElement("div");
 
@@ -44,6 +44,13 @@ const createKeyRow = (keys) => {
   return keyRow;
 };
 
+/**
+ * Creates the container layout for the keyboard rows.
+ * @example
+ * Q W E R T Y
+ *  A S D F
+ *   Z X C
+ */
 const createKeyboardLayout = (layout) => {
   const keyboardLayout = document.createElement("div");
 
@@ -54,7 +61,11 @@ const createKeyboardLayout = (layout) => {
   return keyboardLayout;
 };
 
-const createVirtualKeyboard = (layout) => {
+/**
+ * Creates the main container for the Virtual Keyboard
+ * and sets up the event listener fo click events.
+ */
+export const createVirtualKeyboard = (layout) => {
   const virtualKeyboard = document.createElement("div");
 
   virtualKeyboard.classList.add("virtual-keyboard");
@@ -80,7 +91,7 @@ const createVirtualKeyboard = (layout) => {
   return virtualKeyboard;
 };
 
-const addKeyboardNavigation = (root) => {
+export const addKeyboardNavigation = (root) => {
   /**
    * All virtual keys in the virtual keyboard.
    */
@@ -104,7 +115,7 @@ const addKeyboardNavigation = (root) => {
     keys[(index - 1 + keys.length) % keys.length];
 
   /**
-   * When Tab, returns the next key, or the previous one if Shift is pressed.
+   * When Tab, returns the next key, or the previous while the Shift key is hold.
    */
   const getNextKey = (current, shiftKey) => {
     if (shiftKey) {
@@ -197,36 +208,3 @@ const addKeyboardNavigation = (root) => {
     }
   });
 };
-
-class VirtualKeyboard extends HTMLElement {
-  constructor() {
-    super();
-
-    this.language = document.documentElement.lang;
-
-    // Use the layout in the document's language or the layout in English as a fallback.
-    this.layout = LAYOUT[this.language] ?? LAYOUT[defaultLanguage];
-
-    // Setting `delegatesFocus` to true helps in Firefox to remove focus
-    // when `document.activeElement.blur()` is called.
-    this.root = this.attachShadow({ mode: "open", delegatesFocus: true });
-
-    this.loadCSS();
-  }
-
-  loadCSS() {
-    const stylesLink = document.createElement("link");
-
-    stylesLink.setAttribute("rel", "stylesheet");
-    stylesLink.setAttribute("href", "src/components/virtual-keyboard.css");
-
-    this.root.appendChild(stylesLink);
-  }
-
-  connectedCallback() {
-    this.root.appendChild(createVirtualKeyboard(this.layout));
-    addKeyboardNavigation(this.root);
-  }
-}
-
-export default VirtualKeyboard;

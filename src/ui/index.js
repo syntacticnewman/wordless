@@ -1,6 +1,6 @@
 import GA from "../services/analytics.js";
+import { loadCustomComponents } from "./components/index.js";
 import { initAboutModal } from "./modals.js";
-import { loadCustomComponents } from "./components.js";
 
 const init = () => {
   // initialize modals

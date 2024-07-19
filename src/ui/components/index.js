@@ -1,4 +1,4 @@
-import VirtualKeyboard from "../components/virtual-keyboard.js";
+import VirtualKeyboard from "./virtual-keyboard/index.js";
 
 export const loadCustomComponents = () => {
   // define <virtual-keyboard> component
