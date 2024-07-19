@@ -1,7 +1,8 @@
 @import "./base.css";
 @import "./keyframes.css";
 
-/* #region Header Section */
+/* Header Section
+ * ========================================================================== */
 
 .header {
   align-items: center;
@@ -12,7 +13,7 @@
   justify-content: center;
 }
 
-/* Game Title */
+/* Title */
 
 .wordless-title {
   display: flex;
@@ -53,7 +54,7 @@
   right: 1rem;
 }
 
-/* Show About Dialog Button */
+/* About Button */
 
 .about-dialog-show-btn {
   --btn-color: var(--dark-gray);
@@ -69,9 +70,8 @@
   width: var(--btn-size);
 }
 
-/* #endregion Header Section */
-
-/* #region Main Section */
+/* Main Section
+ * ========================================================================== */
 
 .main {
   display: flex;
@@ -79,7 +79,7 @@
   height: calc(100% - var(--header-height));
 }
 
-/* Game Board */
+/* Board */
 
 .board {
   aspect-ratio: 5/6;
@@ -106,7 +106,7 @@
   }
 }
 
-/* Guess Row */
+/* Guess/Row */
 
 .row {
   display: grid;
@@ -134,7 +134,7 @@
   animation-timing-function: ease-in-out;
 }
 
-/* Letter Box */
+/* Letter/Box */
 
 .box {
   align-items: center;
@@ -176,21 +176,23 @@
   background-color: var(--dark-gray);
 }
 
-/* Virtual Keyboard Component */
+/* Virtual Keyboard Component
+ * ========================================================================== */
 
 virtual-keyboard {
-  --vk-key-color: var(--black);
   --vk-key-bg-color: var(--light-gray);
-  --vk-key-outline-color: var(--outline-color);
-  --vk-key-on-state-color: var(--white);
+  --vk-key-color: var(--black);
   --vk-key-correct-color: var(--green);
-  --vk-key-wrong-color: var(--yellow);
   --vk-key-incorrect-color: var(--dark-gray);
+  --vk-key-on-state-color: var(--white);
+  --vk-key-outline-color: var(--outline-color);
+  --vk-key-wrong-color: var(--yellow);
+
   align-items: flex-end;
   display: flex;
   justify-content: center;
-  padding-bottom: 1rem;
   min-height: 146px;
+  padding-bottom: 1rem;
 }
 
 virtual-keyboard:focus {
@@ -203,9 +205,8 @@ virtual-keyboard:focus {
   }
 }
 
-/* #endregion Main Section */
-
-/* #region About Dialog */
+/* About Dialog
+ * ========================================================================== */
 
 .about-dialog {
   border: 1.5px solid var(--black);
@@ -249,7 +250,7 @@ virtual-keyboard:focus {
   }
 }
 
-/* Close About Dialog Button */
+/* Close About Button */
 
 .about-dialog-close-btn {
   --btn-color: var(--black);
@@ -325,5 +326,3 @@ virtual-keyboard:focus {
     margin-top: 2rem;
   }
 }
-
-/* #endregion About Dialog */
