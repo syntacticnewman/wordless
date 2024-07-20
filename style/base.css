@@ -1,29 +1,39 @@
 :root {
   /* Color Palette */
-  --black: #0d0d0d;
-  --dark-gray: #7d7e7f;
+  --gray-000: #fdfdff;
+  --gray-100: #f2f2f2;
+  --gray-200: #c4c6c7;
+  --gray-300: #7d7e7f;
+  --gray-400: #4d4d4d;
+  --gray-500: #2e2e2e;
+  --gray-600: #0d0d0d;
   --green: #91bf63;
-  --light-gray: #c4c6c7;
   --magenta: #d71ef7;
-  --paper-black: #333333;
-  --paper-white: #f2f2f2;
   --red: #c53a50;
-  --white: #fdfdff;
   --yellow: #f2b705;
 
-  /* Color Light Scheme */
-  --bg-color: var(--white);
-  --border-color: var(--light-gray);
-  --button-color: var(--light-gray);
+  /* Color Scheme */
+  /* --- backgrounds --- */
+  --bg-color: var(--gray-000);
+  --game-bg-color: var(--gray-100);
+  --inverted-bg-color: var(--text-color);
+
+  /* --- borders --- */
+  --border-color: var(--gray-200);
+
+  /* --- buttons ---*/
+  --button-color: var(--gray-200);
+
+  /* --- states --- */
   --correct-color: var(--green);
   --error-color: var(--red);
-  --game-bg-color: var(--paper-white);
-  --incorrect-color: var(--dark-gray);
-  --inverted-bg-color: var(--text-color);
-  --inverted-text-color: var(--bg-color);
+  --incorrect-color: var(--gray-300);
   --outline-color: var(--magenta);
-  --text-color: var(--black);
   --wrong-color: var(--yellow);
+
+  /* --- text --- */
+  --text-color: var(--gray-600);
+  --inverted-text-color: var(--bg-color);
 
   /* Font */
   --font-size: 1rem;
