@@ -59,6 +59,7 @@
 .about-modal-show-btn {
   --btn-color: var(--dark-gray);
   --btn-size: 25px;
+
   background-color: transparent;
   border-radius: 50%;
   border: 2px solid var(--btn-color);
@@ -66,11 +67,10 @@
   font-size: 1rem;
   font-weight: bold;
   height: var(--btn-size);
-  padding: 0;
   width: var(--btn-size);
 }
 
-/* Main Section
+/* Main/Board Section
  * ========================================================================== */
 
 .main {
@@ -150,6 +150,7 @@
   border: 1px solid var(--black);
   font-size: 2rem;
   font-weight: bold;
+  line-height: normal;
   text-transform: uppercase;
 }
 
@@ -176,7 +177,7 @@
   background-color: var(--dark-gray);
 }
 
-/* Virtual Keyboard Component
+/* Virtual Keyboard
  * ========================================================================== */
 
 virtual-keyboard {
@@ -210,10 +211,8 @@ virtual-keyboard:focus {
 
 .about-modal {
   border: none;
-  margin: 0;
   min-height: 100%;
   min-width: 100vw;
-  padding: 0;
 }
 
 @media screen and (min-width: 425px) {
@@ -268,6 +267,7 @@ virtual-keyboard:focus {
 .about-modal-close-btn {
   --btn-color: var(--black);
   --btn-size: 32px;
+
   align-items: center;
   background-color: transparent;
   border: 1.5px solid var(--btn-color);
@@ -277,8 +277,6 @@ virtual-keyboard:focus {
   font-weight: bold;
   height: var(--btn-size);
   justify-content: center;
-  margin: 0;
-  padding: 0;
   position: absolute;
   right: 1rem;
   top: 1rem;
@@ -318,6 +316,7 @@ virtual-keyboard:focus {
 
 .color-meaning .box {
   --box-size: 42px;
+
   width: var(--box-size);
   height: var(--box-size);
 }
