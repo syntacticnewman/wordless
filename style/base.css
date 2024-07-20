@@ -4,16 +4,31 @@
   --dark-gray: #7d7e7f;
   --green: #91bf63;
   --light-gray: #c4c6c7;
-  --outline-color: #d71ef7;
+  --magenta: #d71ef7;
+  --paper-black: #333333;
   --paper-white: #f2f2f2;
   --red: #c53a50;
   --white: #fdfdff;
   --yellow: #f2b705;
 
+  /* Color Light Scheme */
+  --bg-color: var(--white);
+  --border-color: var(--light-gray);
+  --button-color: var(--light-gray);
+  --correct-color: var(--green);
+  --error-color: var(--red);
+  --game-bg-color: var(--paper-white);
+  --incorrect-color: var(--dark-gray);
+  --inverted-bg-color: var(--text-color);
+  --inverted-text-color: var(--bg-color);
+  --outline-color: var(--magenta);
+  --text-color: var(--black);
+  --wrong-color: var(--yellow);
+
   /* Font */
   --font-size: 1rem;
-  --sans: "Secular One", sans-serif;
-  --serif: "Suez One", serif;
+  --sans-family: "Secular One", sans-serif;
+  --serif-family: "Suez One", serif;
 
   /* Animation */
   --flip-speed: 0.5s;
@@ -26,6 +41,7 @@
 
   /* Sizing */
   --header-height: 42px;
+  --button-size: 25px;
 }
 
 /* Normalization */
@@ -46,9 +62,9 @@ html {
 }
 
 body {
-  background-color: var(--paper-white);
-  color: var(--black);
-  font-family: var(--sans);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--sans-family);
   font-size: var(--font-size);
   height: 100%;
 }
