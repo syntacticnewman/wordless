@@ -111,7 +111,11 @@ p {
     --wrong-color: var(--yellow-100);
   }
 
-  a:visited {
+  a {
     color: var(--green-100);
+  }
+
+  a:visited {
+    color: var(--magenta-100);
   }
 }
