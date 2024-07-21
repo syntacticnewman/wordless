@@ -56,8 +56,6 @@
 /* About Button */
 
 .about-modal-show-btn {
-  --button-color: var(--gray-300);
-
   background-color: transparent;
   border-radius: 50%;
   border: 2px solid var(--button-color);
@@ -72,7 +70,7 @@
  * ========================================================================== */
 
 .main {
-  background-color: var(--game-bg-color);
+  background-color: var(--main-bg-color);
   display: flex;
   flex-direction: column;
   height: calc(100% - var(--header-height));
@@ -182,7 +180,7 @@
  * ========================================================================== */
 
 virtual-keyboard {
-  --vk-key-bg-color: var(--button-color);
+  --vk-key-bg-color: var(--keyboard-color);
   --vk-key-color: var(--text-color);
   --vk-key-correct-color: var(--correct-color);
   --vk-key-incorrect-color: var(--incorrect-color);

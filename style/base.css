@@ -1,39 +1,34 @@
 :root {
   /* Color Palette */
-  --gray-000: #fdfdff;
-  --gray-100: #f2f2f2;
-  --gray-200: #c4c6c7;
-  --gray-300: #7d7e7f;
-  --gray-400: #4d4d4d;
-  --gray-500: #2e2e2e;
-  --gray-600: #0d0d0d;
-  --green: #91bf63;
-  --magenta: #d71ef7;
-  --red: #c53a50;
-  --yellow: #f2b705;
+  --black-100: #2e2e2e;
+  --black-200: #0d0d0d;
+  --gray-100: #c4c6c7;
+  --gray-200: #7d7e7f;
+  --gray-300: #4d4d4d;
+  --green-100: #80d926;
+  --green-200: #91bf63;
+  --magenta-100: #ec7eff;
+  --magenta-200: #d71ef7;
+  --red-100: #ff405c;
+  --red-200: #c53a50;
+  --white-100: #fdfdff;
+  --white-200: #f2f2f2;
+  --yellow-100: #ffc71b;
+  --yellow-200: #f2b705;
 
   /* Color Scheme */
-  /* --- backgrounds --- */
-  --bg-color: var(--gray-000);
-  --game-bg-color: var(--gray-100);
-  --inverted-bg-color: var(--text-color);
-
-  /* --- borders --- */
-  --border-color: var(--gray-200);
-
-  /* --- buttons ---*/
+  --bg-color: var(--white-100);
+  --border-color: var(--gray-100);
   --button-color: var(--gray-200);
-
-  /* --- states --- */
-  --correct-color: var(--green);
-  --error-color: var(--red);
-  --incorrect-color: var(--gray-300);
-  --outline-color: var(--magenta);
-  --wrong-color: var(--yellow);
-
-  /* --- text --- */
-  --text-color: var(--gray-600);
+  --correct-color: var(--green-200);
+  --error-color: var(--red-200);
+  --incorrect-color: var(--gray-200);
   --inverted-text-color: var(--bg-color);
+  --keyboard-color: var(--gray-100);
+  --main-bg-color: var(--white-200);
+  --outline-color: var(--magenta-200);
+  --text-color: var(--black-200);
+  --wrong-color: var(--yellow-200);
 
   /* Font */
   --font-size: 1rem;
@@ -86,7 +81,7 @@ p {
 
 /* Universal Focus Indicator */
 
-*:focus {
+*:focus-visible {
   outline: 2px solid var(--outline-color);
 }
 
@@ -96,5 +91,27 @@ p {
   * {
     animation-duration: 0s !important;
     transition-duration: 0s !important;
+  }
+}
+
+/* Color Dark Scheme */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: var(--black-100);
+    --border-color: var(--gray-200);
+    --button-color: var(--gray-100);
+    --correct-color: var(--green-100);
+    --error-color: var(--red-100);
+    --incorrect-color: var(--gray-100);
+    --keyboard-color: var(--black-100);
+    --main-bg-color: var(--gray-300);
+    --outline-color: var(--magenta-100);
+    --text-color: var(--white-100);
+    --wrong-color: var(--yellow-100);
+  }
+
+  a:visited {
+    color: var(--green-100);
   }
 }
